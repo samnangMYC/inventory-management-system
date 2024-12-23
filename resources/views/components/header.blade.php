@@ -1,8 +1,8 @@
 <div class="flex flex-col flex-1 overflow-hidden">
-    <header class="flex items-center justify-between px-6 py-4 bg-white border-b-4 border-primary">
+    <header class="flex items-center justify-between px-6 py-4 dark:bg-gray-900 border-b-4 border-primary">
         <div class="flex items-center gap-4">
             <button @click="sidebarOpen = true" class="text-gray-500 focus:outline-none lg:hidden">
-                <svg class="w-8 h-8" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <svg class="w-8 h-8 dark:text-white" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                     <path d="M4 6H20M4 12H20M4 18H11" stroke="currentColor" stroke-width="2" stroke-linecap="round"
                         stroke-linejoin="round"></path>
                 </svg>
@@ -79,13 +79,25 @@
             </div>
 
             <div x-data="{ dropdownOpen: false }" class="relative">
-                <button @click="dropdownOpen = ! dropdownOpen"
-                    class="relative block w-8 h-8 overflow-hidden rounded-full shadow focus:outline-none">
-                    <img class="object-cover w-full h-full"
-                        src="https://images.unsplash.com/photo-1528892952291-009c663ce843?ixlib=rb-1.2.1&amp;ixid=eyJhcHBfaWQiOjEyMDd9&amp;auto=format&amp;fit=crop&amp;w=296&amp;q=80"
-                        alt="Your avatar">
-                </button>
-
+                <div class="flex gap-4 items-center">
+                    
+                    <span class="hidden lg:flex font-bold items-center">
+                        Hello! 
+                        {{ Auth::user()->name }}
+                        <svg class="w-6 h-6 " aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
+                            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m19 9-7 7-7-7"/>
+                          </svg>
+                          
+                    </span>
+                    <button @click="dropdownOpen = ! dropdownOpen"
+                        class="relative block w-10 h-10 overflow-hidden rounded-full shadow focus:outline-none">
+                        <img class="object-cover w-full h-full"
+                            src="https://images.unsplash.com/photo-1528892952291-009c663ce843?ixlib=rb-1.2.1&amp;ixid=eyJhcHBfaWQiOjEyMDd9&amp;auto=format&amp;fit=crop&amp;w=296&amp;q=80"
+                            alt="Your avatar">
+                
+                    </button>
+                </div>
+         
                 <div x-show="dropdownOpen" @click="dropdownOpen = false" class="fixed inset-0 z-10 w-full h-full"
                     style="display: none;"></div>
 

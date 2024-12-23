@@ -43,7 +43,7 @@
                                         <ul class="text-white ">
                                             @foreach($permission['group'] as $group)
                                                 
-                                                <li class="flex gap-2">
+                                                <li class="flex gap-2 text-black dark:text-white">
                                                     <input type="checkbox" value="{{ $group['id'] }}" name="permission_id[]">
                                                     {{ $group['name'] }}
                                                 </li>

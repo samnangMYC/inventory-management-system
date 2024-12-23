@@ -10,17 +10,16 @@ class UserController extends Controller
     public function index()
     {
         $data['users'] = User::all();
-        $data['roles'] = Role::all();
-   
+      
         // dd(session()->all());
         return view("users", $data); // Pass categories to the view
     }
     public function create()
     {
-        return view("users.create");
+        $data['roles'] = Role::all();
+        return view("users.create",$data);
    
     }
-
       
     /**
      * Store a newly created resource in storage.
@@ -40,13 +39,14 @@ class UserController extends Controller
         //             ->withInput();
         // }        
         // Create a new user
-     
-        User::create([
-            'name' => $request->name, // Include the name field
-            'email' => $request->email,
-            'password' => bcrypt($request->password), // Hash the password
-            'role_id' => $request->role_id
-        ]);
+        // dd($request);
+        $user = new User();
+        $user->name = $request->name;
+        $user->email = $request->email;
+        $user->password = bcrypt($request->password);
+        $user->role_id = $request->role; // Ensure this is set
+        $user->save();
+    
 
         return redirect('users')->with('success','User created successfully!');
 

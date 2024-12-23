@@ -16,15 +16,14 @@
         <div class="py-2  overflow-x-auto sm:-mx-6 sm:px-6 lg:-mx-8 lg:px-8">
             <div class="px-4 inline-block min-w-full overflow-hidden align-middle border-b border-gray-200 shadow sm:rounded-lg">
                
-                <form action="{{route('role.update',$getRecord->id)}}" method="POST">
+                <form action="{{route('role.store')}}" method="POST">
                     @csrf
-                     @method('PUT')
                     <div class=" py-4 space-y-4 ">
+                        
                         <div class="container">
                             <label for="name" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Username</label>
-                            <input value="{{ $getRecord->name }}" type="text" name="name" id="name" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"  required />
+                            <input type="text" name="name" id="name" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="John" required />
                         </div>
-                      
 
                      <div class="container mt-5">
                     <h1 class="text-lg  dark:text-white">Permissions</h1>
@@ -36,30 +35,16 @@
                     
                             </tr>
                         </thead>
-                         @foreach($getPermission as $permission)
                         <tbody class="dark:text-white">
-                           
-                                
+                            @foreach($getPermission as $permission)
                                 <tr>
                                     <td>{{ $permission['name'] }}</td>
                                     <td>
                                         <ul class="text-white ">
                                             @foreach($permission['group'] as $group)
-                                            @php
-                                            $checked = '';
-                                             @endphp
                                                 
-                                                @foreach($getRolePermission as $role)
-                                                   
-                                                    @if($role->permission_id == $group['id'])
-                                                        @php
-                                                            $checked = 'checked';
-                                                        @endphp
-                                                    @endif
-                                                @endforeach
-    
-                                                <li class="flex gap-2">
-                                                    <input type="checkbox" {{ $checked }} value="{{ $group['id'] }}" name="permission_id[]">
+                                                <li class="flex gap-2 text-black dark:text-white">
+                                                    <input type="checkbox" value="{{ $group['id'] }}" name="permission_id[]">
                                                     {{ $group['name'] }}
                                                 </li>
                                             @endforeach

@@ -42,12 +42,12 @@
                       </div>
 
                       <div class="mb-2">
-                        <label for="password" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Your password *</label>
+                        <label for="password" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">User password *</label>
                         <input type="password" name="password" id="password" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" required />
                       </div>
 
                       <!-- User Role -->
-                      <div class="relative w-full inline-block text-left">
+                      <div class="relative w-full inline-block text-left" name="role">
                         <label for="name" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Role *</label>
                         <div>
                             <button id="dropdownButton" data-dropdown-toggle="dropdownMenu" class="flex items-center justify-between w-full rounded-md border border-gray-300 shadow-sm px-4 py-2 bg-white text-sm font-medium text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-100 focus:ring-indigo-500" type="button">
@@ -61,15 +61,17 @@
                         <!-- Dropdown menu -->
                         <div id="dropdownMenu" class="hidden absolute z-10 w-full bg-white rounded-md shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none" role="menu" aria-orientation="vertical" aria-labelledby="dropdownButton">
                             <div class="py-1" role="none">
-                                @foreach($roles as $roles)
-                                <a href="#" class="text-gray-700 block px-4 py-2 text-sm hover:bg-gray-100" role="menuitem" data-value="User ">{{ $role->name}} </a>
+                                @foreach($roles as $role)
+                                <a href="#" data-value="{{ $role->id }}" class="text-gray-700 block px-4 py-2 text-sm hover:bg-gray-100" role="menuitem"> {{$role->name}}</a>
                                 @endforeach
                             </div>
+                           
                         </div>
                         
                         <!-- Hidden input to store the role ID -->
-                        <input class="hidden" type="number" id="role_id" name="role_id">
+                        <input type="hidden" id="role_id" name="role_id">
                     </div>
+                     <!--End User Role -->
          
                         <div class="py-6 text-end mt-4">
                             <button type="button" class="text-white bg-gradient-to-r from-blue-500 via-blue-600 to-blue-700 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-blue-300 dark:focus:ring-blue-800 shadow-lg shadow-blue-500/50 dark:shadow-lg dark:shadow-blue-800/80 font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2 mb-2 ">Reset</button>
@@ -84,36 +86,32 @@
     <!-- Dropdown Button JS -->
     <script >
     $(document).ready(function() {
-        // Toggle dropdown visibility on button click
-        $('#dropdownButton').on('click', function() {
-            $('#dropdownMenu').toggleClass('hidden');
-        });
-
-        // Close the dropdown if clicking outside of it
-        $(document).on('click', function(event) {
-            if (!$(event.target).closest('#dropdownButton').length && !$(event.target).closest('#dropdownMenu').length) {
-                $('#dropdownMenu').addClass('hidden');
-            }
-        });
-
-        // Update button text when a dropdown item is clicked
-        $('#dropdownMenu a').on('click', function(event) {
-            event.preventDefault(); // Prevent the default anchor click behavior
-            const selectedValue = $(this).data('value'); // Get the value from data attribute
-            
-            // Check if the selected value is "Admin"
-            let valueToSet;
-            if (selectedValue === 'Admin') {
-                valueToSet = 1; // Set to 1 if "Admin"
-            } else {
-                valueToSet = 2; // Set to 2 for any other value
-            }
-            console.log(valueToSet);
-            $('#dropdownButton').text(selectedValue); // Update the button text
-            $('#role_id').val(valueToSet);
-            $('#dropdownMenu').addClass('hidden'); // Hide the dropdown menu
-        });
+    // Toggle dropdown visibility on button click
+    $('#dropdownButton').on('click', function() {
+        $('#dropdownMenu').toggleClass('hidden');
     });
+
+    // Close the dropdown if clicking outside of it
+    $(document).on('click', function(event) {
+        if (!$(event.target).closest('#dropdownButton').length && !$(event.target).closest('#dropdownMenu').length) {
+            $('#dropdownMenu').addClass('hidden');
+        }
+    });
+
+    // Update button text and hidden input value when a dropdown item is clicked
+    $('#dropdownMenu a').on('click', function(event) {
+        event.preventDefault(); // Prevent the default anchor click behavior
+        const selectedValue = $(this).data('value'); // Get the value from data attribute
+        const selectedText = $(this).text(); // Get the text of the selected role
+
+        // Update the button text and hidden input value
+        $('#dropdownButton').text(selectedText); // Update the button text
+        $('#role_id').val(selectedValue); // Set the value of the hidden input to the role ID
+        console.log(selectedText); // Log the selected value (role ID)
+        console.log('Hidden Input Value:', $('#role').val()); // Log the value of the hidden input
+        $('#dropdownMenu').addClass('hidden'); // Hide the dropdown menu
+        });
+        });
     </script>
     </section>
 

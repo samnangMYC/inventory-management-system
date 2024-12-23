@@ -18,8 +18,8 @@
         {{-- Header --}}
         @include('components/header')
         
-        <main class="flex-1 overflow-x-hidden overflow-y-auto bg-gray-200">
-            <div class="container px-2 py-8 mx-auto">
+        <main class="flex-1 overflow-x-hidden overflow-y-auto bg-gray-200 dark:bg-gray-800">
+            <div class=" px-4 py-8 mx-auto">
                 @yield('content')
             </div>
         </main>

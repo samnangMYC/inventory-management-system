@@ -4,18 +4,31 @@ namespace App\Http\Controllers;
 use App\Models\PermissionRole;
 use App\Models\Role;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use App\Models\Permission;
 class RoleController extends Controller
 {
     public function index() {
-        $roles = Role::all();
-        return view('role', compact('roles'));
+        $PermissionRole = PermissionRole::getPermission('Role', Auth::user()->role_id);
+        $data['PermissionAdd'] = PermissionRole::getPermission('Add Role', Auth::user()->role_id);
+        $data['PermissionEdit'] = PermissionRole::getPermission('Edit Role', Auth::user()->role_id);
+        $data['PermissionDelete'] = PermissionRole::getPermission('Delete Role', Auth::user()->role_id);
+        if(!$PermissionRole){
+            abort(404);
+        }
+        $data['roles'] = Role::all();
+       
+        return view('role', $data);
     }
       /**
      * Show the form for creating a new resource.
      */
     public function create()
     {
+        $PermissionRole = PermissionRole::getPermission('Role', Auth::user()->role_id);
+        if(!$PermissionRole){
+            abort(404);
+        }
         $getPermission = Permission::getRecord();
    
         $data['getPermission'] = $getPermission;
@@ -29,6 +42,10 @@ class RoleController extends Controller
      */
     public function store(Request $request)
     {
+        $PermissionRole = PermissionRole::getPermission('Role', Auth::user()->role_id);
+        if(!$PermissionRole){
+            abort(404);
+        }
         // dd($request->all());
         // Validate the incoming request
         $request->validate([
@@ -53,6 +70,10 @@ class RoleController extends Controller
     public function edit($id)
     {  
          // Use Eloquent's find method to get the role by ID
+         $PermissionRole = PermissionRole::getPermission('Role', Auth::user()->role_id);
+         if(!$PermissionRole){
+             abort(404);
+         }
         $data['getRecord'] = Role::findOrFail($id); // This will throw a 404 if not found
         $getPermission = Permission::getRecord(); // Assuming this method exists
         $data['getPermission'] = $getPermission;
@@ -67,6 +88,10 @@ class RoleController extends Controller
      */
     public function update(Request $request, string $id)
     {
+        $PermissionRole = PermissionRole::getPermission('Role', Auth::user()->role_id);
+        if(!$PermissionRole){
+            abort(404);
+        }
         $role =  Role::findOrFail($id);
         $role->name = $request->name;
         $role->save();
@@ -80,15 +105,19 @@ class RoleController extends Controller
      */
     public function destroy($id)
     {
-    // Find the role by ID or fail with a 404 error
-    $role = Role::findOrFail($id);
-    PermissionRole::where('role_id', $role->id)->delete();
+        $PermissionRole = PermissionRole::getPermission('Role', Auth::user()->role_id);
+        if(!$PermissionRole){
+            abort(404);
+        }
+        // Find the role by ID or fail with a 404 error
+        $role = Role::findOrFail($id);
+        PermissionRole::where('role_id', $role->id)->delete();
 
-    // Delete the role
-    $role->delete();
+        // Delete the role
+        $role->delete();
 
-    // Redirect back to the roles index with a success message
-    return redirect()->route('role.index')->with('success', 'Role successfully deleted');
+        // Redirect back to the roles index with a success message
+        return redirect()->route('role.index')->with('success', 'Role successfully deleted');
     
     }
 }
