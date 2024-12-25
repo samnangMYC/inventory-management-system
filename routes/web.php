@@ -2,11 +2,13 @@
 
 use App\Http\Controllers\AuthManger;
 use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\ProductBrandController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\RoleController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\SubCategoryController;
-use App\Models\SubCategory;
+
 use Illuminate\Support\Facades\Route;
 
 
@@ -18,12 +20,27 @@ Route::post('/register', [ AuthManger::class,'registerPost']) ->name('register.p
 Route::get('/logout', [ AuthManger::class,'logout']) ->name('logout');
 Route::get('/logout', [ AuthManger::class,'logout']) ->name('logout');
 
+
 Route::group(['middleware' => 'useradmin'], function(){
     
-    Route::get('/dashboard', [AuthManger::class,'dashboard'])->name('dashboard');
+    Route::get('/dashboard', [DashboardController::class,'index'])->name('dashboard');
     Route::get('/product', [ProductController::class,'index'])->name('product');
     Route::get('/product/create', [ProductController::class,'create'])->name('product.create');
+    Route::post('/product/create', [ProductController::class,'store'])->name('product.store');
+    Route::get('/product/edit/{id}', [ProductController::class, 'edit'])->name('product.edit');
+    Route::put('/product/edit/{id}', [ProductController::class, 'update'])->name('product.update');
+    Route::delete('/product/delete/{id}', [ProductController::class, 'destroy'])->name('product.destroy');
 
+    
+    Route::get('/product-brand', [ProductBrandController::class,'index'])->name('product-brand.index');
+    Route::get('/product-brand/create', [ProductBrandController::class,'create'])->name('product-brand.create');
+    Route::post('/product/create', [ProductBrandController::class,'store'])->name('product-brand.store');
+    Route::get('/product-brand/edit/{id}', [ProductBrandController::class,'edit'])->name('product-brand.edit');
+    Route::put('/product-brand/edit/{id}', [ProductBrandController::class,'update'])->name('product-brand.update');
+    Route::delete('/product-brand/{id}', [ProductBrandController::class,'destroy'])->name('product-brand.destroy');
+
+
+   
     // Define resource routes for categories
     // Route::resource('categories', CategoryController::class);
     Route::get('/categories', [CategoryController::class,'index'])->name('categories');
@@ -44,7 +61,9 @@ Route::group(['middleware' => 'useradmin'], function(){
     Route::get('/users', [UserController::class,'index'])->name('users.index');
     Route::get('/users/create', [UserController::class,'create'])->name('users.create');
     Route::post('/users/create', [UserController::class,'store'])->name('users.store');
-    Route::get('/users/edit/', [UserController::class,'update'])->name('users.update');
+    Route::get('/users/edit/{id}', [UserController::class,'edit'])->name('users.edit');
+    Route::put('/users/edit/{id}', [UserController::class,'update'])->name('users.update');
+    Route::delete('/users/edit/{id}', [UserController::class,'destroy'])->name('users.destroy');
 
     Route::get('/role', [RoleController::class,'index'])->name('role.index');
     Route::get('/role/create', [RoleController::class,'create'])->name('role.create');

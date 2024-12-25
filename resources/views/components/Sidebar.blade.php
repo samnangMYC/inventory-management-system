@@ -11,7 +11,9 @@
     <div :class="sidebarOpen ? 'translate-x-0 ease-out' : '-translate-x-full ease-in'" class="fixed bg-gradient-to-r from-blue-500 to-blue-600 inset-y-0 left-0 z-30 w-64 overflow-y-auto transition duration-300 transform  lg:translate-x-0 lg:static lg:inset-0">
         <div class="flex items-center justify-center mt-8 ">
             <div class="flex items-center">     
-                <a href="{{route('dashboard')}}" class="mx-2 p-2 rounded-sm bg-orange-400 text-2xl font-semibold uppercase text-white">Tomnenh</a>
+                <a href="{{route('dashboard')}}" class=" rounded-sm">
+                  <img class=" h-32 brightness-200 " src="assets/logos/logo2.png" alt="logo">
+                </a>
             </div>
         </div>
         @php
@@ -49,14 +51,11 @@
             <!--Sub Categories Link -->
             @if(!empty($PermissionSubCategory))
             <a 
-               class="{{ request()->routeIs('sub-category') ? 'bg-gray-700 bg-opacity-25 ' : '' }} flex items-center px-6 py-2 text-light hover:bg-gray-700 hover:bg-opacity-25 hover:text-gray-100" 
+               class="{{ request()->routeIs('sub-category.index') ? 'bg-gray-700 bg-opacity-25 ' : '' }} flex items-center px-6 py-2 text-light hover:bg-gray-700 hover:bg-opacity-25 hover:text-gray-100" 
                href="{{ route('sub-category.index') }}">
-               <svg class="w-8 h-8 text-gray-800 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
+               <svg class="w-8 h-8 " aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
                   <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13.213 9.787a3.391 3.391 0 0 0-4.795 0l-3.425 3.426a3.39 3.39 0 0 0 4.795 4.794l.321-.304m-.321-4.49a3.39 3.39 0 0 0 4.795 0l3.424-3.426a3.39 3.39 0 0 0-4.794-4.795l-1.028.961"/>
-                </svg>
-                
-                
-                
+                </svg>            
                <span class="mx-3">Sub Categories</span>
             </a>
             @endif
@@ -72,15 +71,18 @@
                <span class="mx-3">Product</span>
             </a>
             @endif
+
             <a 
-               class="{{ request()->routeIs('product-brand') ? 'bg-gray-700 bg-opacity-25  ' : '' }} flex items-center px-6 py-2 text-light hover:bg-gray-700 hover:bg-opacity-25 hover:text-gray-100" 
-               href="{{ route('product') }}">
-               <svg class="w-8 h-8 text-gray-800 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
+               class="{{ request()->routeIs('product-brand.index') ? 'bg-gray-700 bg-opacity-25  ' : '' }} flex items-center px-6 py-2 text-light hover:bg-gray-700 hover:bg-opacity-25 hover:text-gray-100" 
+               href="{{ route('product-brand.index') }}">
+               <svg class="w-8 h-8 " aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
                   <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 12c.263 0 .524-.06.767-.175a2 2 0 0 0 .65-.491c.186-.21.333-.46.433-.734.1-.274.15-.568.15-.864a2.4 2.4 0 0 0 .586 1.591c.375.422.884.659 1.414.659.53 0 1.04-.237 1.414-.659A2.4 2.4 0 0 0 12 9.736a2.4 2.4 0 0 0 .586 1.591c.375.422.884.659 1.414.659.53 0 1.04-.237 1.414-.659A2.4 2.4 0 0 0 16 9.736c0 .295.052.588.152.861s.248.521.434.73a2 2 0 0 0 .649.488 1.809 1.809 0 0 0 1.53 0 2.03 2.03 0 0 0 .65-.488c.185-.209.332-.457.433-.73.1-.273.152-.566.152-.861 0-.974-1.108-3.85-1.618-5.121A.983.983 0 0 0 17.466 4H6.456a.986.986 0 0 0-.93.645C5.045 5.962 4 8.905 4 9.736c.023.59.241 1.148.611 1.567.37.418.865.667 1.389.697Zm0 0c.328 0 .651-.091.94-.266A2.1 2.1 0 0 0 7.66 11h.681a2.1 2.1 0 0 0 .718.734c.29.175.613.266.942.266.328 0 .651-.091.94-.266.29-.174.537-.427.719-.734h.681a2.1 2.1 0 0 0 .719.734c.289.175.612.266.94.266.329 0 .652-.091.942-.266.29-.174.536-.427.718-.734h.681c.183.307.43.56.719.734.29.174.613.266.941.266a1.819 1.819 0 0 0 1.06-.351M6 12a1.766 1.766 0 0 1-1.163-.476M5 12v7a1 1 0 0 0 1 1h2v-5h3v5h7a1 1 0 0 0 1-1v-7m-5 3v2h2v-2h-2Z"/>
                 </svg>                
                 
                <span class="mx-3">Product Brand</span>
+             
             </a>
+          
 
           <!-- User Link -->
           @if(!empty($PermissionUser))

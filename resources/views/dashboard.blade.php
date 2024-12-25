@@ -1,7 +1,7 @@
 @extends('layout.layout')
 
 @section('content')
-<h3 class="text-3xl font-medium text-gray-700">Dashboard</h3>
+<h3 class="text-3xl font-medium text-gray-700 dark:text-white">Dashboard</h3>
     
 <div class="mt-4">
     <div class="flex flex-wrap -mx-6">
@@ -101,6 +101,7 @@
         </svg>
       </div>
     </div>
+    
     <div id="labels-chart" class="px-2.5"></div>
     <div class="grid grid-cols-1 items-center border-gray-200 border-t dark:border-gray-700 justify-between mt-5 p-4 md:p-6 pt-0 md:pt-0">
       <div class="flex justify-between items-center pt-5">

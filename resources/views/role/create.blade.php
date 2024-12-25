@@ -4,8 +4,8 @@
 
 <div class="">
 
-    <div class="flex px-4 py-8 justify-between">
-        <h1 class="text-3xl font-medium text-gray-700">Add New Role Form</h1>
+    <div class="flex px-4 py-2 justify-between">
+        <h1 class="text-3xl font-medium text-gray-700 dark:text-white">Add New Role Form</h1>
     </div>
     @if (session('success'))
     <div class="bg-green-500 text-lg text-white p-2 rounded mb-4">

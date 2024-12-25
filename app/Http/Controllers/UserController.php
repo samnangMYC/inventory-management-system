@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 use App\Models\User;
 use Illuminate\Http\Request;
 use App\Models\Role;
-
+use Illuminate\Support\Facades\Hash;
 class UserController extends Controller
 {
     public function index()
@@ -57,8 +57,10 @@ class UserController extends Controller
      */
     public function edit($id)
     {  
-    
-          
+        $data['user'] = User::findOrFail($id);
+        $data['roles'] = Role::all();
+        return view('users.edit',data: $data);
+ 
     }
 
     /**
@@ -66,6 +68,31 @@ class UserController extends Controller
      */
     public function update(Request $request, string $id)
     {
+        // Validate the request
+        $request->validate([
+            'email' => 'required|email|unique:users,email,'.$id,
+            'name' => 'required|string|max:255',
+            'password' => 'string|min:8|confirmed',
+            'role_id' => 'required|integer|in:1,2',	
+            
+        ]);
+        // dd($request->all());
+        // Find the user by ID
+        $user = User::findOrFail($id);
+        $user->name = $request->name;
+        $user->email = $request->email;
+        $user->role_id = $request->role_id; 
+
+        // Only update the password if it's provided
+        if ($request->filled('password')) {
+            $user->password = Hash::make($request->password); // Hash the new password
+        }
+
+        // Save the user
+        $user->save();
+
+        // Redirect back with a success message
+        return redirect()->route('users.index')->with('success', 'User  updated successfully.');
 
     }
 
@@ -74,7 +101,12 @@ class UserController extends Controller
      */
     public function destroy($id)
     {
-
+        // Find the user by ID
+        $user = User::findOrFail($id);
+        // Delete the user
+        $user->delete();
+        // Redirect back with a success message
+        return redirect()->route('users.index')->with('success', 'User deleted successfully.');
     
     }
 

@@ -4,18 +4,14 @@
 
 <div class="">
 
-    <div class="flex px-4 py-8 justify-between">
-        <h1 class="text-3xl font-medium text-gray-700">Add Categories Form</h1>
+    <div class="flex px-4 py-2 justify-between">
+        <h1 class="text-3xl font-medium text-gray-700 dark:text-white">Add Categories Form</h1>
     </div>
     
-    @if (session('success'))
-    <div class="bg-green-500 text-lg text-white p-2 rounded mb-4">
-        {{ session('success') }}
-    </div>
-    @endif
+    @include('components/alert')
 
     <section class="flex flex-col dark:bg-gray-900 rounded-lg">  
-        <div class="py-2  overflow-x-auto sm:-mx-6 sm:px-6 lg:-mx-8 lg:px-8">
+        <div class="py-2 overflow-x-auto sm:-mx-6 sm:px-6 lg:-mx-8 lg:px-8">
             <div class="px-4 inline-block min-w-full overflow-hidden align-middle border-b border-gray-200 shadow sm:rounded-lg">
                
                 <form action="{{route('categories.store')}}" method="POST">

@@ -9,6 +9,7 @@
     <script src="https://cdn.jsdelivr.net/gh/alpinejs/alpine@2.x.x/dist/alpine.min.js" defer></script>
     <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
 </head>
 <body> 
         
@@ -24,6 +25,8 @@
             </div>
         </main>
     </div>
-
 </body>
+<script>
+
+</script>
 </html>

@@ -4,26 +4,11 @@
 
 <div class="">
 
-    <div class="flex px-4 py-8 justify-between">
-        <h1 class="text-3xl font-medium text-gray-700">Add Users Form</h1>
+    <div class="flex px-4 py-2 justify-between">
+        <h1 class="text-3xl font-medium text-gray-700 dark:text-white">Add Users Form</h1>
     </div>
-          <!-- Display success message -->
-          @if (session('success'))
-          <div class="bg-green-500 text-white p-4 rounded mb-4">
-              {{ session('success') }}
-          </div>
-         @endif
- 
-         <!-- Display validation errors -->
-         @if ($errors->any())
-             <div class="bg-red-500 text-white p-4 rounded mb-4">
-                 <ul>
-                     @foreach ($errors->all() as $error)
-                         <li>{{ $error }}</li>
-                     @endforeach
-                 </ul>
-             </div>
-         @endif
+    <!-- Display success message -->
+   @include('component/alert')
          
     <section class="flex flex-col dark:bg-gray-900 rounded-lg">  
         <div class="py-2  overflow-x-auto sm:-mx-6 sm:px-6 lg:-mx-8 lg:px-8">

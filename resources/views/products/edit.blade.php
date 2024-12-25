@@ -4,21 +4,22 @@
 
 <div class="">
     <div class="flex px-4 py-2 justify-between">
-        <h1 class="text-3xl font-medium text-gray-700 dark:text-white">Add Product Form</h1>
+        <h1 class="text-3xl font-medium text-gray-700 dark:text-white">Edit Product Form</h1>
     </div>
         <!-- Display success message -->
-         @required('components/alert')
+        @include('components/alert')
          
     <section class="flex flex-col dark:bg-gray-900 rounded-lg">  
         <div class="py-2 my  overflow-x-auto sm:-mx-6 sm:px-6 lg:-mx-8 lg:px-8">
             <div class="p-4  inline-block min-w-full overflow-hidden align-middle border-b border-gray-200 shadow sm:rounded-lg">
-                <h2 class="mb-4 text-xl font-bold text-gray-900 dark:text-white">Add a new product</h2>
-                <form action="{{ route('product.store')}}" method="POST" enctype="multipart/form-data">
+                <h2 class="mb-4 text-xl font-bold text-gray-900 dark:text-white">Modify the product</h2>
+                <form action="{{ route('product.update',$product->id)}}" method="POST" enctype="multipart/form-data">
                     @csrf
+                    @method('PUT')
                     <div class="grid gap-4 sm:grid-cols-2 sm:gap-6">
                         <div class="sm:col-span-2">
                             <label for="name" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Product Name</label>
-                            <input type="text" name="name" id="name" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" placeholder="Type product name" required="">
+                            <input type="text" name="name" id="name" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" value="{{$product->name}}" required="">
                         </div>                   
                         <div>
                             <label for="category" class="block mb-2  text-sm font-medium text-gray-900 dark:text-white">Sub Category</label>
@@ -31,7 +32,7 @@
                         </div>
                         <div class="w-full">
                             <label for="price" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Price</label>
-                            <input type="number" name="price" id="price" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" placeholder="$2999" required="">
+                            <input type="number" value="{{$productPrice->price}}" name="price" id="price" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" required="">
                         </div>
                         <div>
                             <label for="brand" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Brand *</label>
@@ -43,31 +44,32 @@
                         </div>
                         <div>
                             <label for="weight" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Weight (g)</label>
-                            <input type="number" name="weight" id="weight" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" placeholder="12" required="">
+                            <input type="number" value="{{$productInfo->weight}}" name="weight" id="weight" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"  required="">
                         </div> 
                         <div class="w-full">
                             <label for="stock" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Stock QTY *</label>
-                            <input type="number" name="stock" id="stock" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" placeholder="100" required="">
+                            <input type="number" value="{{$product->stock}}" name="stock" id="stock" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" required="">
                         </div>
                         <div class="w-full">
                             <label for="specification" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Specification *</label>
-                            <input type="text" name="specification" id="specification" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" placeholder="Green " required="">
+                            <input type="text" value="{{$productInfo->specification}}" name="specification" id="specification" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" required="">
                         </div>
                         <div class="w-full">
                             <label for="size" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Size (optional) *</label>
-                            <input type="text" name="size" id="size" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" placeholder="XL,M,L" >
+                            <input type="text" value="{{$productInfo->size}}" name="size" id="size" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" placeholder="XL,M,L" >
                         </div>
                     
                         <div class="sm:col-span-2">
                             <label for="description" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Description</label>
-                            <textarea id="description" rows="8" name="descriptions" class="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-primary-500 focus:border-primary-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" placeholder="Your description here"></textarea>
+                            <textarea id="description"  rows="8" name="descriptions" class="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-primary-500 focus:border-primary-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500">{{$productInfo->descriptions}}</textarea>
+                            
                         </div>
                     </div>
                     <div class=" mt-4">
                         <label for="large-input" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Image</label>  
                          <!-- Image Preview Section -->
-                            <div id="image-preview" class="mx-4 w-32 h-32 hidden relative">
-                                <img id="preview" src="" alt="Image Preview" class="w-full h-auto border border-gray-300 rounded-lg" />
+                            <div id="image-preview" class="mx-4 mb-12 w-32 h-32  ">
+                                <img id="preview" src="{{ asset('storage/' . $product->image ) }}" alt="Image Preview" class="w-full h-auto border border-gray-300 rounded-lg" />
                                            
                             </div>               
                             <div class="flex items-center justify-center w-full">
@@ -123,6 +125,6 @@
             // Reset the image source
             preview.src = '';
         }
-    </script>
+    </>
 </div>
 @endsection
