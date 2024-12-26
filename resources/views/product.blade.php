@@ -2,6 +2,7 @@
 
 @section('content')
 
+
 <div>
     <div class="flex px-4 py-2 justify-between">
         <h1 class="text-3xl font-medium text-gray-700 dark:text-white">All Product</h1>
@@ -11,32 +12,25 @@
               </svg>                 
              Add Product</button>
     </div>
-    <div class="rounded-md p-2  dark:bg-gray-900">
-
-        <form class="flex items-center max-w-sm mx-auto justify-start">   
-            <label for="simple-search" class="sr-only">Search</label>
-            <div class="relative w-full">
-                <div class="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
-                    <svg class="w-4 h-4 text-gray-500 dark:text-gray-400" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 18 20">
-                        <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5v10M3 5a2 2 0 1 0 0-4 2 2 0 0 0 0 4Zm0 10a2 2 0 1 0 0 4 2 2 0 0 0 0-4Zm12 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4Zm0 0V6a3 3 0 0 0-3-3H9m1.5-2-2 2 2 2"/>
+    <section class="p-2 rounded-t-md  dark:bg-gray-900">
+        <form class="max-w-md mx-auto">   
+            <label for="default-search" class="mb-2 text-sm font-medium text-gray-900 sr-only dark:text-white">Search</label>
+            <div class="relative">
+                <div class="absolute inset-y-0 start-0 flex items-center ps-3 pointer-events-none">
+                    <svg class="w-4 h-4 text-gray-500 dark:text-gray-400" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 20">
+                        <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m19 19-4-4m0-7A7 7 0 1 1 1 8a7 7 0 0 1 14 0Z"/>
                     </svg>
                 </div>
-                <input type="text" id="simple-search" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full pl-10 p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Search product name..." required />
+                <input type="search" id="default-search" class="block w-full pl-5 pr-3 py-3 ps-10 text-sm text-gray-900 border border-gray-300 rounded-lg bg-gray-50 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Search Mockups, Logos..." required />
+                <button type="submit" class="text-white absolute end-2.5 bottom-2.5 bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-4 py-2 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Search</button>
             </div>
-            <button type="submit" class="p-2.5 ml-2 text-sm font-medium text-white bg-blue-700 rounded-lg border border-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
-                <svg class="w-4 h-4" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 20">
-                    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m19 19-4-4m0-7A7 7 0 1 1 1 8a7 7 0 0 1 14 0Z"/>
-                </svg>
-                <span class="sr-only">Search</span>
-            </button>
-        </form>       
-
-    </div>
+        </form>
+ 
+    </section>
     
     <section class="flex flex-col">  
-        
         <div class="py-2 -my-2 overflow-x-auto sm:-mx-6 sm:px-6 lg:-mx-8 lg:px-8">
-            <div class="inline-block min-w-full overflow-hidden align-middle border-b border-gray-200 dark:border-gray-700 shadow rounded-lg">
+            <div class="inline-block min-w-full overflow-hidden align-middle border-b border-gray-200 dark:border-gray-700 shadow rounded-b-lg ">
                 <div class="overflow-y-auto max-h-[70vh]">
                 <table class="min-w-full sticky top-0 bg-white dark:bg-gray-900 "> 
                     <thead class="sticky top-0 ">
@@ -81,11 +75,11 @@
                     <tbody class=" dark:bg-gray-900 divide-y divide-gray-200 dark:divide-gray-700">
                         @foreach($products as $product)
                         <tr class="">
-                            <td class="px-6 py- text-sm leading-5 text-gray-500 dark:text-white whitespace-no-wrap border-b border-gray-200 dark:border-gray-700">
+                            <td class="px-6 py-2 text-sm leading-5 text-gray-500 dark:text-white whitespace-no-wrap border-b border-gray-200 dark:border-gray-700">
                                 {{ $product->code }}
                             </td>
         
-                            <td class="px-6 py-4 whitespace-no-wrap border-b border-gray-200 dark:border-gray-700">
+                            <td class="px-6 py-2 whitespace-no-wrap border-b border-gray-200 dark:border-gray-700">
                                 <div class="flex items-center">
                                     <div class="flex-shrink-0 w-20 ">
                                         <img class="h-16 rounded-md object-cover"  src="{{ asset('storage/' . $product->image) }}" alt="{{ $product->name }}">
@@ -93,18 +87,18 @@
                                 </div>
                             </td>
                     
-                            <td class="px-6 py-4 text-sm leading-5 text-gray-500 dark:text-white whitespace-no-wrap border-b border-gray-200 dark:border-gray-700">
+                            <td class="px-6 py-2 text-sm leading-5 text-gray-500 dark:text-white whitespace-no-wrap border-b border-gray-200 dark:border-gray-700">
                                 {{ $product->name }}
                             </td>
-                            <td class="px-6 py-4 text-sm leading-5 text-gray-500 dark:text-white whitespace-no-wrap border-b border-gray-200 dark:border-gray-700">
+                            <td class="px-6 py-2 text-sm leading-5 text-gray-500 dark:text-white whitespace-no-wrap border-b border-gray-200 dark:border-gray-700">
                                 {{ $product->productInfo->specification ?? 'No specification' }}
                             </td>
-                            <td class="px-6 py-4 text-sm leading-5 text-gray-500 dark:text-white whitespace-no-wrap border-b border-gray-200 dark:border-gray-700">
+                            <td class="px-6 py-2 text-sm leading-5 text-gray-500 dark:text-white whitespace-no-wrap border-b border-gray-200 dark:border-gray-700">
                                 {{ $product->productInfo->weight ?? '0' }}
                             </td>
                             
                     
-                            <td class="px-6 py-4 text-sm leading-5 text-gray-500 dark:text-white whitespace-no-wrap border-b border-gray-200 dark:border-gray-700">
+                            <td class="px-6 py-2 text-sm leading-5 text-gray-500 dark:text-white whitespace-no-wrap border-b border-gray-200 dark:border-gray-700">
                                 @if (isset($product_prices[$product->id]) && $product_prices[$product->id] !== null)
                                     {{ $product_prices[$product->id]->price }} <!-- Accessing the price property -->
                                 @else
@@ -112,26 +106,26 @@
                                 @endif
                             </td>
 
-                            <td class="px-6 py-4 text-sm leading-5 text-gray-500 dark:text-white whitespace-no-wrap border-b border-gray-200 dark:border-gray-700">
+                            <td class="px-6 py-2 text-sm leading-5 text-gray-500 dark:text-white whitespace-no-wrap border-b border-gray-200 dark:border-gray-700">
                                 {{ $product->subCategory->name ?? 'Not available' }}
                             </td>
-                            <td class="px-6 py-4 text-sm leading-5 text-gray-500 dark:text-white whitespace-no-wrap border-b border-gray-200 dark:border-gray-700">
+                            <td class="px-6 py-2 text-sm leading-5 text-gray-500 dark:text-white whitespace-no-wrap border-b border-gray-200 dark:border-gray-700">
                                 @if($product->stock > 0)
                                     {{ $product->stock }}
                                 @else
                                 <button type="button" class="text-white bg-red-700 hover:bg-red-800 focus:outline-none focus:ring-4 focus:ring-red-300 font-medium rounded-full text-[8px] w-24 h-8 text-center me-2 mb-2 dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-900">Out Of Stock</button>
                                 @endif
                             </td>
-                            <td class="px-6 py-4 text-sm leading-5 text-gray-500 dark:text-white whitespace-no-wrap border-b border-gray-200 dark:border-gray-700">
+                            <td class="px-6 py-2 text-sm leading-5 text-gray-500 dark:text-white whitespace-no-wrap border-b border-gray-200 dark:border-gray-700">
                                
-                                {{ $brandName ?? 'No brand' }}
+                                {{ $brandName->where('id', $product->brand_id)->first()->name  ?? 'No brand' }}
                                
                             </td>  
-                            <td class="px-6 py-4 text-sm leading-5 text-gray-500 dark:text-white whitespace-no-wrap border-b border-gray-200 dark:border-gray-700">
+                            <td class="px-6 py-2 text-sm leading-5 text-gray-500 dark:text-white whitespace-no-wrap border-b border-gray-200 dark:border-gray-700">
                                {{ $product->created_at->diffForHumans() }}
                             </td>
                             
-                            <td class="flex px-6 py-4 gap-3 justify-center whitespace-no-wrap border-b border-gray-200 dark:border-gray-700">
+                            <td class="flex px-6 py-2 gap-3 justify-center whitespace-no-wrap  border-gray-200 dark:border-gray-700">
                                 <form action="{{route('product.destroy',$product->id)}}" method="POST" class="">
                                     @csrf
                                     @method('DELETE')
@@ -141,7 +135,7 @@
                                         </svg>             
                                     </button>
                                 </form>
-                                <button type="button" onclick="if(confirm('Are you sure you want to edit this product?')) { window.location.href='{{ route('product.edit', $product->id) }}'; }" class="text-white bg-gradient-to-r from-purple-500 via-purple-600 to-purple-700 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-purple-300 dark:focus:ring-purple-800 font-medium rounded-lg text-sm p-3 text-center me-2 mb-2">
+                                <button type="button" onclick="window.location='{{ route('product.edit', $product->id) }}'" class="text-white bg-gradient-to-r from-purple-500 via-purple-600 to-purple-700 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-purple-300 dark:focus:ring-purple-800 font-medium rounded-lg text-sm p-3 text-center me-2 mb-2">
                                     <svg class="w-6 h-6" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
                                         <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m14.304 4.844 2.852 2.852M7 7H4a1 1 0 0 0-1 1v10a1 1 0 0 0 1 1h11a1 1 0 0 0 1-1v-4.5m2.409-9.91a2.017 2.017 0 0 1 0 2.853l-6.844 6.844L8 14l.713-3.565 6.844-6.844a2.015 2.015 0 0 1 2.852 0Z"/>
                                     </svg>
@@ -150,8 +144,7 @@
                                     <svg class="w-6 h-6 text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
                                         <path stroke="currentColor" stroke-width="2" d="M21 12c0 1.2-4.03 6-9 6s-9-4.8-9-6c0-1.2 4.03-6 9-6s9 4.8 9 6Z"/>
                                         <path stroke="currentColor" stroke-width="2" d="M15 12a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z"/>
-                                    </svg>
-                                                             
+                                    </svg>                            
                                 </button>
                             </td>
                         </tr>         

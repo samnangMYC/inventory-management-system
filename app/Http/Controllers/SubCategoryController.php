@@ -10,7 +10,6 @@ class SubCategoryController extends Controller
     public function index()
     {
         $data["subCategories"] = SubCategory::all(); // Fetch all subcategories
-        // $data['selectedCategory'] = Category::getCategory($data["subCategories"]->id);
 
         return view('sub-category', $data); // Return a view
     }

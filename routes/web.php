@@ -15,13 +15,14 @@ use Illuminate\Support\Facades\Route;
 Route::get('/',[ AuthManger::class,'home']) -> name('home');
 Route::get('/login',[ AuthManger::class,'login']) -> name('login');
 Route::post('/login',[ AuthManger::class,'loginPost']) -> name('login.post');
-Route::get('/register', [ AuthManger::class,'register']) ->name('register');
-Route::post('/register', [ AuthManger::class,'registerPost']) ->name('register.post');
-Route::get('/logout', [ AuthManger::class,'logout']) ->name('logout');
-Route::get('/logout', [ AuthManger::class,'logout']) ->name('logout');
+
 
 
 Route::group(['middleware' => 'useradmin'], function(){
+    Route::get('/register', [ AuthManger::class,'register']) ->name('register');
+    Route::post('/register', [ AuthManger::class,'registerPost']) ->name('register.post');
+    Route::get('/logout', [ AuthManger::class,'logout']) ->name('logout');
+    Route::get('/logout', [ AuthManger::class,'logout']) ->name('logout');
     
     Route::get('/dashboard', [DashboardController::class,'index'])->name('dashboard');
     Route::get('/product', [ProductController::class,'index'])->name('product');
@@ -34,7 +35,7 @@ Route::group(['middleware' => 'useradmin'], function(){
     
     Route::get('/product-brand', [ProductBrandController::class,'index'])->name('product-brand.index');
     Route::get('/product-brand/create', [ProductBrandController::class,'create'])->name('product-brand.create');
-    Route::post('/product/create', [ProductBrandController::class,'store'])->name('product-brand.store');
+    Route::post('/product-brand/create', [ProductBrandController::class,'store'])->name('product-brand.store');
     Route::get('/product-brand/edit/{id}', [ProductBrandController::class,'edit'])->name('product-brand.edit');
     Route::put('/product-brand/edit/{id}', [ProductBrandController::class,'update'])->name('product-brand.update');
     Route::delete('/product-brand/{id}', [ProductBrandController::class,'destroy'])->name('product-brand.destroy');

@@ -46,7 +46,7 @@ class ProductController extends Controller
    
 
         // Fetch the brand using the getProductBrand method
-        $brandName = ProductBrand::getProductBrand($brandId);
+        $brandName = ProductBrand::all(); 
     
         // Prepare data for the view
         $data = [

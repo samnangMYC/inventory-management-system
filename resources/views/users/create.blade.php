@@ -8,7 +8,7 @@
         <h1 class="text-3xl font-medium text-gray-700 dark:text-white">Add Users Form</h1>
     </div>
     <!-- Display success message -->
-   @include('component/alert')
+   @include('components/alert')
          
     <section class="flex flex-col dark:bg-gray-900 rounded-lg">  
         <div class="py-2  overflow-x-auto sm:-mx-6 sm:px-6 lg:-mx-8 lg:px-8">

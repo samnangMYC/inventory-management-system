@@ -35,22 +35,22 @@
                     <tbody class=" divide-y divide-gray-200 dark:divide-gray-700">
                         @foreach($categories as $category)
                         <tr>
-                            <td class="px-6 py-4 text-sm leading-5 text-gray-500 dark:text-white whitespace-no-wrap border-b border-gray-200 dark:border-gray-700">
+                            <td class="px-6 py-2 text-sm leading-5 text-gray-500 dark:text-white whitespace-no-wrap border-b border-gray-200 dark:border-gray-700">
                                 {{ $category->id }}
                             </td>
 
-                            <td class="px-6 font-bold py-4 text-sm leading-5 text-gray-500 dark:text-white whitespace-no-wrap border-b border-gray-200 dark:border-gray-700">
+                            <td class="px-6 font-bold py-2 text-sm leading-5 text-gray-500 dark:text-white whitespace-no-wrap border-b border-gray-200 dark:border-gray-700">
                                 {{ $category->name }}
                             </td>
-                            <td class="px-6 py-4 text-sm leading-5 text-gray-500 dark:text-white whitespace-no-wrap border-b border-gray-200 dark:border-gray-700">
+                            <td class="px-6 py-2 text-sm leading-5 text-gray-500 dark:text-white whitespace-no-wrap border-b border-gray-200 dark:border-gray-700">
                                 {{ $category->descriptions }}
                             </td>
                     
-                            <td class="px-6 py-4 text-sm leading-5 text-gray-500 dark:text-white whitespace-no-wrap border-b border-gray-200 dark:border-gray-700">
-                                {{ $category->created_at }}
+                            <td class="px-6 py-2 text-sm leading-5 text-gray-500 dark:text-white whitespace-no-wrap border-b border-gray-200 dark:border-gray-700">
+                                {{ $category->created_at->diffForHumans() }}
                             </td>
                            
-                            <td class="px-6 py-4 text-center whitespace-no-wrap border-b border-gray-200 dark:border-gray-700">
+                            <td class="px-6 py-2 text-center whitespace-no-wrap border-b border-gray-200 dark:border-gray-700">
                                 <form action="{{ route('categories.destroy', $category->id) }}" method="POST" style="display:inline;">
                                     @csrf
                                     @method('DELETE')

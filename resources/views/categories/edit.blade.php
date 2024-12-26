@@ -7,12 +7,9 @@
     <div class="flex px-4 py-8 justify-between">
         <h1 class="text-3xl font-medium text-gray-700">Add Categories Form</h1>
     </div>
-    @if (session('success'))
-    <div class="bg-green-500 text-lg text-white p-2 rounded mb-4">
-        {{ session('success') }}
-    </div>
-   
-    @endif
+    
+    @include('components.alert')
+  
     <div class="p-4 mb-4 text-sm text-green-800 rounded-lg bg-green-50 dark:bg-gray-800 dark:text-green-400" role="alert">
         <span class="font-medium">Success alert!</span> Change a few things up and try submitting again.
       </div>

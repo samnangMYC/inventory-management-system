@@ -6,7 +6,7 @@
         <div class="flex px-4 py-2 justify-between">
             <h1 class="text-3xl font-medium text-gray-700 dark:text-white">All User</h1>
             <button type="button" onclick="window.location='{{ route('users.create') }}'" class="flex items-center gap-2 text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-3 py-2.5 me-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800">
-                <svg class="w-6 h-6 text-gray-800 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" viewBox="0 0 24 24">
+                <svg class="w-6 h-6 text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" viewBox="0 0 24 24">
                     <path fill-rule="evenodd" d="M9 4a4 4 0 1 0 0 8 4 4 0 0 0 0-8Zm-2 9a4 4 0 0 0-4 4v1a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2v-1a4 4 0 0 0-4-4H7Zm8-1a1 1 0 0 1 1-1h1v-1a1 1 0 1 1 2 0v1h1a1 1 0 1 1 0 2h-1v1a1 1 0 1 1-2 0v-1h-1a1 1 0 0 1-1-1Z" clip-rule="evenodd"/>
                   </svg>
                   
@@ -34,6 +34,9 @@
                                     Role
                                 </th>
                                 <th class="px-6 py-3 text-xs font-medium leading-4 tracking-wider text-left text-gray-500 dark:text-white uppercase border-b border-gray-200 bg-gray-50 dark:bg-gray-900">
+                                    Status
+                                </th>
+                                <th class="px-6 py-3 text-xs font-medium leading-4 tracking-wider text-left text-gray-500 dark:text-white uppercase border-b border-gray-200 bg-gray-50 dark:bg-gray-900">
                                     CreateAt
                                 </th>
                                 <th class="px-6 text-center py-3 text-xs font-medium leading-4 tracking-wider text text-gray-500 dark:text-white uppercase border-b border-gray-200 bg-gray-50 dark:bg-gray-900">
@@ -44,31 +47,33 @@
                         <tbody class="dark:bg-gray-900 ">
                             <tr>
                                 @foreach($users as $user)
-                                <td class="px-6 py-4 text-sm leading-5 text-gray-500 dark:text-white whitespace-no-wrap border-b border-gray-200">
+                                <td class="px-6 py-2 text-sm leading-5 text-gray-500 dark:text-white whitespace-no-wrap border-b border-gray-200">
                                  {{ $user->id }}
                                 </td>
     
-                                <td class="px-6 font-bold py-4 text-sm leading-5 text-gray-500 dark:text-white whitespace-no-wrap border-b border-gray-200">
+                                <td class="px-6 font-bold py-2 text-sm leading-5 text-gray-500 dark:text-white whitespace-no-wrap border-b border-gray-200">
                                     {{ $user->name }}
                                 </td>
-                                <td class="px-6 py-4 text-sm leading-5 text-gray-500 dark:text-white whitespace-no-wrap border-b border-gray-200">
+                                <td class="px-6 py-2 text-sm leading-5 text-gray-500 dark:text-white whitespace-no-wrap border-b border-gray-200">
                                     {{ $user->email }}
                                 </td>
-                                <td class="px-6 font-bold py-4 text-sm leading-5 text-gray-500 dark:text-white whitespace-no-wrap border-b border-gray-200">
-                                    @if($user->role_id == 1)
-                                        admin
+                                <td class="px-6 font-bold py-2 text-sm leading-5 text-gray-500 dark:text-white whitespace-no-wrap border-b border-gray-200">
+                                    {{ $roles->where('id', $user->role_id)->first()->name }}
+                                </td>
+                                <td class="px-6 py-2 text-sm leading-5 text-gray-500 dark:text-white whitespace-no-wrap border-b border-gray-200">
+                                    @if($user->status == '1')
+                                        <span class="text-green-500">Active</span>
                                     @else
-                                        user
+                                        <span class="text-red-500 ">Inactive</span>
                                     @endif
-                                        
                                 </td>
-                        
-                                <td class="px-6 py-4 text-sm leading-5 text-gray-500 dark:text-white whitespace-no-wrap border-b border-gray-200">
-                                    {{ $user->created_at }}
+                                <td class="px-6 py-2 text-sm leading-5 text-gray-500 dark:text-white whitespace-no-wrap border-b border-gray-200">
+                                    {{ $user->created_at->diffForHumans() }}
                                 </td>
+                            
                                
              
-                                <td class="px-6 py-4 text-center whitespace-no-wrap border-b border-gray-200">
+                                <td class="px-6 py-2 text-center whitespace-no-wrap border-b border-gray-200">
                                     <form action="{{route('users.destroy',$user->id) }}"  method="POST" style="display:inline;">
                                         @csrf
                                         @method('DELETE')

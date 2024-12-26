@@ -1,18 +1,22 @@
 
-<div x-data="{ sidebarOpen: false }" class="flex h-screen  ">
+<div x-data="{ sidebarOpen: false }" class="flex h-screen   ">
     <!-- Sidebar backdrop -->
     <div 
         :class="sidebarOpen ? 'block' : 'hidden'" 
         @click="sidebarOpen = false" 
         class="fixed inset-0 z-20 transition-opacity bg-black opacity-50 lg:hidden">
     </div>
+    
 
-
-    <div :class="sidebarOpen ? 'translate-x-0 ease-out' : '-translate-x-full ease-in'" class="fixed bg-gradient-to-r from-blue-500 to-blue-600 inset-y-0 left-0 z-30 w-64 overflow-y-auto transition duration-300 transform  lg:translate-x-0 lg:static lg:inset-0">
+    <div :class="sidebarOpen ? 'translate-x-0 ease-out' : '-translate-x-full ease-in'" class="fixed bg-gradient-to-r dark:bg-gray-900 from-blue-600 to-blue-700  inset-y-0 left-0 z-30 w-64 overflow-y-auto transition duration-300 transform  lg:translate-x-0 lg:static lg:inset-0">
         <div class="flex items-center justify-center mt-8 ">
             <div class="flex items-center">     
                 <a href="{{route('dashboard')}}" class=" rounded-sm">
-                  <img class=" h-32 brightness-200 " src="assets/logos/logo2.png" alt="logo">
+                  <img class=" h-32 brightness-200 " src="{{asset('logo2.png')}}" alt="logo">
+                  {{-- <svg class="w-24 h-24 text-amber-300" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" viewBox="0 0 24 24">
+                     <path fill-rule="evenodd" d="M4 4a1 1 0 0 1 1-1h1.5a1 1 0 0 1 .979.796L7.939 6H19a1 1 0 0 1 .979 1.204l-1.25 6a1 1 0 0 1-.979.796H9.605l.208 1H17a3 3 0 1 1-2.83 2h-2.34a3 3 0 1 1-4.009-1.76L5.686 5H5a1 1 0 0 1-1-1Z" clip-rule="evenodd"/>
+                   </svg>
+                    --}}
                 </a>
             </div>
         </div>
@@ -22,6 +26,7 @@
             $PermissionCategory = App\Models\PermissionRole::getPermission('Category',Auth::user()->role_id);
             $PermissionSubCategory = App\Models\PermissionRole::getPermission('Sub Category',Auth::user()->role_id);
             $PermissionProduct = App\Models\PermissionRole::getPermission('Product',Auth::user()->role_id);
+            $PermissionProductBrand = App\Models\PermissionRole::getPermission('Product Brand',Auth::user()->role_id);
             $PermissionSetting = App\Models\PermissionRole::getPermission('Setting',Auth::user()->role_id);
         @endphp
 
@@ -71,7 +76,8 @@
                <span class="mx-3">Product</span>
             </a>
             @endif
-
+              <!-- Product Brand Link -->
+            @if(!empty($PermissionProductBrand))
             <a 
                class="{{ request()->routeIs('product-brand.index') ? 'bg-gray-700 bg-opacity-25  ' : '' }} flex items-center px-6 py-2 text-light hover:bg-gray-700 hover:bg-opacity-25 hover:text-gray-100" 
                href="{{ route('product-brand.index') }}">
@@ -80,8 +86,8 @@
                 </svg>                
                 
                <span class="mx-3">Product Brand</span>
-             
             </a>
+            @endif
           
 
           <!-- User Link -->

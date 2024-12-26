@@ -51,7 +51,7 @@ class ProductBrandController extends Controller
         $data['productBrands'] = ProductBrand::findOrFail($id);
  
         // dd($category);
-        return view('subCategory.edit',$data);
+        return view('product-brand.edit',$data);
         
     }
 
@@ -63,16 +63,17 @@ class ProductBrandController extends Controller
             // Validate the request
         $request->validate([
             'name' => 'required|string|max:255',
-            'descriptions' => 'required|string',
+            'contact' => 'required|string|max:255',
+            'url' => 'required|string|max:255',
         ]);
          // Find the category by ID
-         $subCategories = ProductBrand::findOrFail($id);
+         $productBrand = ProductBrand::findOrFail($id);
 
         // Update the category
-        $subCategories->update($request->only('name', 'descriptions'));
+        $productBrand->update($request->only('name', 'conact', 'url'));
 
         // Redirect back to the categories index with a success message
-        return redirect()->route(route: 'sub-category.index')->with('success', 'SubCategory updated successfully!');
+        return redirect()->route(route: 'product-brand.index')->with('success', 'SubCategory updated successfully!');
     }
 
     /**
@@ -81,13 +82,13 @@ class ProductBrandController extends Controller
     public function destroy($id)
     {
         // Find the category by ID
-        $subCategories = ProductBrand::findOrFail($id);
+        $productBrand = ProductBrand::findOrFail($id);
 
         // Delete the category
-        $subCategories->delete();
+        $productBrand->delete();
 
         // Redirect back to the categories index with a success message
-        return redirect()->route('sub-category')->with('success', 'SubCategory deleted successfully!');
+        return redirect()->route('product-brand.index')->with('success', 'SubCategory deleted successfully!');
     
     }
 }

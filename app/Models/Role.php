@@ -10,4 +10,9 @@ class Role extends Model
 
     protected $fillable = ['name','createAt'];
 
+    public function role()
+    {
+        return $this->hasOne(Role::class);
+    }
+
 }

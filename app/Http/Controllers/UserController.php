@@ -10,6 +10,7 @@ class UserController extends Controller
     public function index()
     {
         $data['users'] = User::all();
+        $data['roles'] =  Role::all();
       
         // dd(session()->all());
         return view("users", $data); // Pass categories to the view
@@ -26,12 +27,11 @@ class UserController extends Controller
      */
     public function store(Request $request)
     {
-        // $request->validate([
-        //     'email' => 'required|email|unique:users,email',
-        //     'password' => 'required|min:6|confirmed', // Ensure you have a password confirmation field
-        //     'name' => 'required|string|max:255',
-        //     'role_id' => 'required|integer|in:1,2',
-        // ]);
+        $request->validate([
+            'email' => 'required|email|unique:users,email',
+            'password' => 'required|min:6|confirmed', // Ensure you have a password confirmation field
+            'name' => 'required|string|max:255',
+        ]);
                 // Check if validation fails
         // if ($request->fails()) {
         //     return redirect()->back()
@@ -44,7 +44,7 @@ class UserController extends Controller
         $user->name = $request->name;
         $user->email = $request->email;
         $user->password = bcrypt($request->password);
-        $user->role_id = $request->role; // Ensure this is set
+        $user->role_id = $request->role_id; // Ensure this is set
         $user->save();
     
 
@@ -57,7 +57,8 @@ class UserController extends Controller
      */
     public function edit($id)
     {  
-        $data['user'] = User::findOrFail($id);
+        $user = User::findOrFail($id);
+        $data['user'] = $user;
         $data['roles'] = Role::all();
         return view('users.edit',data: $data);
  
@@ -72,9 +73,9 @@ class UserController extends Controller
         $request->validate([
             'email' => 'required|email|unique:users,email,'.$id,
             'name' => 'required|string|max:255',
-            'password' => 'string|min:8|confirmed',
-            'role_id' => 'required|integer|in:1,2',	
-            
+            'password' => 'nullable|string|min:8|confirmed',
+            'status' => 'required|in:0,1', 
+            'role_id' => 'required'       
         ]);
         // dd($request->all());
         // Find the user by ID
@@ -82,6 +83,7 @@ class UserController extends Controller
         $user->name = $request->name;
         $user->email = $request->email;
         $user->role_id = $request->role_id; 
+        $user->status = $request->status;
 
         // Only update the password if it's provided
         if ($request->filled('password')) {

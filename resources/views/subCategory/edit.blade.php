@@ -7,24 +7,7 @@
     <div class="flex px-4 py-8 justify-between">
         <h1 class="text-3xl font-medium text-gray-700">Edit Sub Categories Form</h1>
     </div>
-    
-           <!-- Display success message -->
-        @if (session('success'))
-           <div class="bg-green-500 text-white p-4 rounded mb-4">
-               {{ session('success') }}
-           </div>
-         @endif
-  
-          <!-- Display validation errors -->
-          @if ($errors->any())
-              <div class="bg-red-500 text-white p-4 rounded mb-4">
-                  <ul>
-                      @foreach ($errors->all() as $error)
-                          <li>{{ $error }}</li>
-                      @endforeach
-                  </ul>
-              </div>
-    @endif
+    @include('components.alert')
 
     <section class="flex flex-col dark:bg-gray-900 rounded-lg">  
         <div class="py-2  overflow-x-auto sm:-mx-6 sm:px-6 lg:-mx-8 lg:px-8">
@@ -32,7 +15,7 @@
                
                 <form action="{{ route('sub-category.update', $subCategories->id) }}" method="POST">
                     @csrf
-                    @method('POST')
+                    @method('PUT')
                     <div class=" py-4 space-y-4">
                         
                         <div>

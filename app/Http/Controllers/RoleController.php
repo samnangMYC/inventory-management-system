@@ -13,6 +13,7 @@ class RoleController extends Controller
         $data['PermissionAdd'] = PermissionRole::getPermission('Add Role', Auth::user()->role_id);
         $data['PermissionEdit'] = PermissionRole::getPermission('Edit Role', Auth::user()->role_id);
         $data['PermissionDelete'] = PermissionRole::getPermission('Delete Role', Auth::user()->role_id);
+        $data['PermissionRoles'] = PermissionRole::all();
         if(!$PermissionRole){
             abort(404);
         }
@@ -49,9 +50,8 @@ class RoleController extends Controller
         // dd($request->all());
         // Validate the incoming request
         $request->validate([
-            'name' => 'required|string|max:255|unique:roles,name',
+            'name' => 'required|string|max:255',
             'permission_id' => 'required|array', // Ensure permission_id is an array
-            'permission_id.*' => 'exists:permissions,id', // Validate each permission ID
         ]);
 
 

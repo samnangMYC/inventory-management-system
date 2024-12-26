@@ -44,26 +44,26 @@
                     <tbody class="">
                         <tr>
                             @foreach($productBrands as $productBrand)
-                            <td class="px-6 py-4 text-sm leading-5 text-gray-500 dark:text-white whitespace-no-wrap border-b border-gray-200">
+                            <td class="px-6 py-2 text-sm leading-5 text-gray-500 dark:text-white whitespace-no-wrap border-b border-gray-200">
                                 {{ $productBrand->id }}
                             </td>
 
-                            <td class="px-6 font-bold py-4 text-sm leading-5 text-gray-500 dark:text-white whitespace-no-wrap border-b border-gray-200">
+                            <td class="px-6 font-bold py-2 text-sm leading-5 text-gray-500 dark:text-white whitespace-no-wrap border-b border-gray-200">
                                 {{ $productBrand->name }}
                             </td>
-                            <td class="px-6 py-4 text-sm leading-5 text-gray-500 dark:text-white whitespace-no-wrap border-b border-gray-200">
+                            <td class="px-6 py-2 text-sm leading-5 text-gray-500 dark:text-white whitespace-no-wrap border-b border-gray-200">
                                 {{ $productBrand->contact }}
                             </td>
-                            <td class="px-6 py-4 text-sm leading-5 text-gray-500 dark:text-white whitespace-no-wrap border-b border-gray-200">
+                            <td class="px-6 py-2 text-sm leading-5 text-gray-500 dark:text-white whitespace-no-wrap border-b border-gray-200">
                                 {{  $productBrand->url }}
                             </td>
                     
-                            <td class="px-6 py-4 text-sm leading-5 text-gray-500 dark:text-white whitespace-no-wrap border-b border-gray-200">
-                                {{ $productBrand->created_at }}
+                            <td class="px-6 py-2 text-sm leading-5 text-gray-500 dark:text-white whitespace-no-wrap border-b border-gray-200">
+                                {{ $productBrand->created_at->diffForHumans() }}
                             </td>
                            
          
-                           <td class="px-6 py-4 text-center whitespace-no-wrap border-b border-gray-200">
+                           <td class="px-6 py-2 flex gap-2 text-center whitespace-no-wrap border-b border-gray-200">
                                 <form action="{{ route('product-brand.destroy', $productBrand->id) }}" method="POST" style="display:inline;">
                                     @csrf
                                     @method('DELETE')

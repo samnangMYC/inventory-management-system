@@ -8,7 +8,7 @@
             <button type="button" onclick="window.location='{{ route('role.create') }}'" class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-4 py-2.5 me-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800">New Role</button>
         </div>
         
-        
+        @include('components/alert')
         <section class="flex flex-col">  
             <div class="py-2 -my-2 overflow-x-auto sm:-mx-6 sm:px-6 lg:-mx-8 lg:px-8">
                 <div class="inline-block min-w-full overflow-hidden align-middle border-b border-gray-200 shadow sm:rounded-lg">
@@ -23,10 +23,13 @@
                                     UserName
                                 </th>
                                 <th class="px-6 py-3 text-xs font-medium leading-4 tracking-wider text-left text-gray-500 dark:text-white uppercase border-b border-gray-200 bg-gray-50 dark:bg-gray-900">
-                                   Permission
+                                   Total Permission
                                 </th>
                                 <th class="px-6 py-3 text-xs font-medium leading-4 tracking-wider text-left text-gray-500 dark:text-white uppercase border-b border-gray-200 bg-gray-50 dark:bg-gray-900">
                                     CreateAt
+                                </th>
+                                <th class="px-6 py-3 text-xs font-medium leading-4 tracking-wider text-left text-gray-500 dark:text-white uppercase border-b border-gray-200 bg-gray-50 dark:bg-gray-900">
+                                    Updateat
                                 </th>
                                 <th class="px-6 text-center py-3 text-xs font-medium leading-4 tracking-wider text text-gray-500 dark:text-white uppercase border-b border-gray-200 bg-gray-50 dark:bg-gray-900">
                                     Action
@@ -36,22 +39,25 @@
                         <tbody class="dark:bg-gray-900 ">	
                             <tr>
                                 @foreach($roles as $role)
-                                <td class="px-6 py-4 text-sm leading-5 text-gray-500 dark:text-white whitespace-no-wrap border-b border-gray-200">
+                                <td class="px-6 py-2 text-sm leading-5 text-gray-500 dark:text-white whitespace-no-wrap border-b border-gray-200">
                                  {{ $role->id }}
                                 </td>
     
-                                <td class="px-6 font-bold py-4 text-sm leading-5 text-gray-500 dark:text-white whitespace-no-wrap border-b border-gray-200">
+                                <td class="px-6 font-bold py-2 text-sm leading-5 text-gray-500 dark:text-white whitespace-no-wrap border-b border-gray-200">
                                     {{ $role->name }}
                                 </td>
                         
-                                <td class="px-6 py-4 text-sm leading-5 text-gray-500 dark:text-white whitespace-no-wrap border-b border-gray-200">
-                                    edit
+                                <td class="px-6 py-2 text-sm leading-5 text-gray-500 dark:text-white whitespace-no-wrap border-b border-gray-200">
+                                    {{ $PermissionRoles->where('role_id', $role->id)->count() }}
                                 </td>
-                                <td class="px-6 py-4 text-sm leading-5 text-gray-500 dark:text-white whitespace-no-wrap border-b border-gray-200">
-                                    {{ $role->created_at }}
+                                <td class="px-6 py-2 text-sm leading-5 text-gray-500 dark:text-white whitespace-no-wrap border-b border-gray-200">
+                                    {{ $role->created_at->diffForHumans() }}
+                                </td>
+                                <td class="px-6 py-2 text-sm leading-5 text-gray-500 dark:text-white whitespace-no-wrap border-b border-gray-200">
+                                    {{ $role->updated_at->diffForHumans() }}
                                 </td>
                                
-                                <td class="px-6 py-4 text-center whitespace-no-wrap border-b border-gray-200">
+                                <td class="px-6 py-2 text-center whitespace-no-wrap border-b border-gray-200">
                                     <form action="{{ route('role.delete', $role->id) }}" method="POST" style="display:inline;">
                                         @csrf
                                         @method('DELETE')
