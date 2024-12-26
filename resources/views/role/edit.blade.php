@@ -4,8 +4,8 @@
 
 <div class="">
 
-    <div class="flex px-4 py-2 justify-between">
-        <h1 class="text-3xl font-medium text-gray-700 dark:text-white">Edit Role From</h1>
+    <div class="flex px-4 py-8 justify-between">
+        <h1 class="text-3xl font-medium text-gray-700">Add New Role Form</h1>
     </div>
     @if (session('success'))
     <div class="bg-green-500 text-lg text-white p-2 rounded mb-4">
@@ -22,7 +22,7 @@
                         
                         <div class="container">
                             <label for="name" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Username</label>
-                            <input type="text" value="{{ $getRecord->id }}" name="name" id="name" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="John" required />
+                            <input type="text" name="name" id="name" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="John" required />
                         </div>
 
                      <div class="container mt-5">
