@@ -11,6 +11,8 @@ class ProductInfo extends Model
     protected $fillable = [
         'pro_id',
         'weigth',
+        'discount',
+        'tax',
         'specification',
         'size',
         'description'
@@ -18,6 +20,6 @@ class ProductInfo extends Model
     // Define the relationship with Product
     public function product()
     {
-        return $this->belongsTo(Product::class, 'id'); // Specify the foreign key and local key
+        return $this->belongsTo(Product::class, 'pro_id', 'id'); // 'pro_id' is the foreign key in ProductInfo
     }
 }

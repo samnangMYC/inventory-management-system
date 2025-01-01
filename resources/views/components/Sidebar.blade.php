@@ -1,5 +1,5 @@
 
-<div x-data="{ sidebarOpen: false }" class="flex h-screen   ">
+<div x-data="{ sidebarOpen: false }" class="flex h-screen  ">
     <!-- Sidebar backdrop -->
     <div 
         :class="sidebarOpen ? 'block' : 'hidden'" 
@@ -8,15 +8,17 @@
     </div>
     
 
-    <div :class="sidebarOpen ? 'translate-x-0 ease-out' : '-translate-x-full ease-in'" class="fixed bg-gradient-to-r dark:bg-gray-900 from-blue-600 to-blue-700  inset-y-0 left-0 z-30 w-64 overflow-y-auto transition duration-300 transform  lg:translate-x-0 lg:static lg:inset-0">
+    <div :class="sidebarOpen ? 'translate-x-0 ease-out' : '-translate-x-full ease-in'" id="sidebar" class="fixed bg-gradient-to-r dark:bg-gray-900 from-blue-600 to-blue-700  inset-y-0 left-0 z-30 w-64 overflow-y-auto transition duration-300 transform  lg:translate-x-0 lg:static lg:inset-0">
+      <button class="absolute pt-4 pl-3 " >
+         <svg class="w-10 h-10 text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
+            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M18 6H6m12 4H6m12 4H6m12 4H6"/>
+          </svg>    
+      </button>
         <div class="flex items-center justify-center mt-8 ">
             <div class="flex items-center">     
                 <a href="{{route('dashboard')}}" class=" rounded-sm">
                   <img class=" h-32 brightness-200 " src="{{asset('logo2.png')}}" alt="logo">
-                  {{-- <svg class="w-24 h-24 text-amber-300" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" viewBox="0 0 24 24">
-                     <path fill-rule="evenodd" d="M4 4a1 1 0 0 1 1-1h1.5a1 1 0 0 1 .979.796L7.939 6H19a1 1 0 0 1 .979 1.204l-1.25 6a1 1 0 0 1-.979.796H9.605l.208 1H17a3 3 0 1 1-2.83 2h-2.34a3 3 0 1 1-4.009-1.76L5.686 5H5a1 1 0 0 1-1-1Z" clip-rule="evenodd"/>
-                   </svg>
-                    --}}
+
                 </a>
             </div>
         </div>
@@ -41,6 +43,17 @@
              
             <span class="mx-3">Dashboard</span>
          </a>
+            <!-- Sale Link -->
+            <a 
+            class="{{ request()->routeIs('sale.index') ? 'bg-gray-700 bg-opacity-25 ' : '' }} flex items-center px-6 py-2 text-light hover:bg-secondary hover:bg-opacity-25 hover:text-gray-100" 
+            href="{{ route('sale.index') }}">
+            <svg class="w-8 h-8 text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" viewBox="0 0 24 24">
+               <path fill-rule="evenodd" d="M7 6a2 2 0 0 1 2-2h11a2 2 0 0 1 2 2v7a2 2 0 0 1-2 2h-2v-4a3 3 0 0 0-3-3H7V6Z" clip-rule="evenodd"/>
+               <path fill-rule="evenodd" d="M2 11a2 2 0 0 1 2-2h11a2 2 0 0 1 2 2v7a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2v-7Zm7.5 1a2.5 2.5 0 1 0 0 5 2.5 2.5 0 0 0 0-5Z" clip-rule="evenodd"/>
+               <path d="M10.5 14.5a1 1 0 1 1-2 0 1 1 0 0 1 2 0Z"/>
+             </svg>
+            <span class="mx-3">POS Sales</span>
+          </a>
             <!-- Categories Link -->
             @if(!empty($PermissionCategory))
             <a 
@@ -116,4 +129,7 @@
             </a>
             @endif
         </nav>
+        <script>
+          
+        </script>
     </div>

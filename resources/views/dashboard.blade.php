@@ -33,7 +33,7 @@
                     </div>
 
                     <div class="mx-5">
-                        <h4 class="text-2xl font-semibold text-gray-700 dark:text-white">{{ $totalUsers }}</h4>
+                        <h4 class="text-2xl font-semibold text-gray-700 dark:text-white">{{ $activeUsers }}</h4>
                         <div class="text-gray-500 dark:text-slate-100">Total Users</div>
                     </div>
                 </div>
@@ -61,7 +61,7 @@
                 </div>
 
                 <div class="mx-5">
-                    <h4 class="text-2xl font-semibold text-gray-700 dark:text-white">200,521</h4>
+                    <h4 class="text-2xl font-semibold text-gray-700 dark:text-white">{{ $totalOrders}}</h4>
                     <div class="text-gray-500 dark:text-slate-300">Total Orders</div>
                 </div>
             </div>
@@ -85,7 +85,7 @@
                 </div>
 
                 <div class="mx-5">
-                    <h4 class="text-2xl font-semibold text-gray-700 dark:text-white">215,542</h4>
+                    <h4 class="text-2xl font-semibold text-gray-700 dark:text-white">{{ $totalProducts }}</h4>
                     <div class="text-gray-500 dark:text-slate-300">Available Products</div>
                 </div>        
             </div>

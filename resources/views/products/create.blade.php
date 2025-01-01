@@ -7,7 +7,7 @@
         <h1 class="text-3xl font-medium text-gray-700 dark:text-white">Add Product Form</h1>
     </div>
         <!-- Display success message -->
-         @required('components/alert')
+         @include('components/alert')
          
     <section class="flex flex-col dark:bg-gray-900 rounded-lg">  
         <div class="py-2 my  overflow-x-auto sm:-mx-6 sm:px-6 lg:-mx-8 lg:px-8">
@@ -26,12 +26,11 @@
                                 @foreach($subCategories as $subCategory)
                                 <option value="{{ $subCategory->id }}">{{ $subCategory->name }}</option>
                                 @endforeach
-                        
                             </select>
                         </div>
                         <div class="w-full">
                             <label for="price" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Price</label>
-                            <input type="number" name="price" id="price" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" placeholder="$2999" required="">
+                            <input type="number" name="price" id="price" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" placeholder="$2999" min="0" max="999999999" step="0.01" required>
                         </div>
                         <div>
                             <label for="brand" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Brand *</label>
@@ -56,6 +55,14 @@
                         <div class="w-full">
                             <label for="size" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Size (optional) *</label>
                             <input type="text" name="size" id="size" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" placeholder="XL,M,L" >
+                        </div>
+                        <div class="w-full">
+                            <label for="size" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">discount % *</label>
+                            <input type="text" name="discount" id="discount" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" placeholder="2%" >
+                        </div>
+                        <div class="w-full">
+                            <label for="discount" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Tax % *</label>
+                            <input type="text" name="tax" id="tax" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" placeholder="2%" >
                         </div>
                     
                         <div class="sm:col-span-2">

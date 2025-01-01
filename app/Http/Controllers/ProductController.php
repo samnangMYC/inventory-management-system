@@ -39,10 +39,6 @@ class ProductController extends Controller
     
         // Fetch all product info and brands
         $productsInfo = ProductInfo::all();
-    
-
-        // Retrieve the brand ID from the product
-        $brandId = $product->brand_id ?? '1';
    
 
         // Fetch the brand using the getProductBrand method
@@ -132,6 +128,8 @@ class ProductController extends Controller
             $productInfo = new ProductInfo();
             $productInfo->pro_id = $product->id; // Link to the product
             $productInfo->weight = $request->weight; // Weight
+            $productInfo->discount = $request->discount;
+            $productInfo->tax = $request->tax;
             $productInfo->specification = $request->specification; // Specification	
             $productInfo->size = $request->size; // Size
             $productInfo->descriptions = $request->descriptions; // Description
@@ -193,6 +191,7 @@ class ProductController extends Controller
             'descriptions' => 'nullable|string', // Description can be null or a string
             'image' => 'nullable|image|max:2048', // Optional image validation
         ]);
+     
         
         // Update product attributes
         $product->name = $request->name;
@@ -229,6 +228,8 @@ class ProductController extends Controller
         $productInfo = ProductInfo::where('pro_id', $product->id)->first();
         if ($productInfo) {
             $productInfo->weight = $request->weight; // Update weight
+            $productInfo->discount = $request->discount;
+            $productInfo->tax = $request->tax;
             $productInfo->specification = $request->specification; // Update specification	
             $productInfo->size = $request->size; // Update size
             $productInfo->descriptions = $request->descriptions; // Update description
@@ -238,6 +239,8 @@ class ProductController extends Controller
             $productInfo = new ProductInfo();
             $productInfo->pro_id = $product->id; // Link to the product
             $productInfo->weight = $request->weight; // Weight
+            $productInfo->discount = $request->discount;
+            $productInfo->tax = $request->tax;
             $productInfo->specification = $request->specification; // Specification	
             $productInfo->size = $request->size; // Size
             $productInfo->descriptions = $request->descriptions; // Description

@@ -4,6 +4,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     @vite('resources/css/app.css')
+    @vite(['resources/css/app.css','resources/js/app.js'])
     <title>Inventory Management System</title>
     <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/gh/alpinejs/alpine@2.x.x/dist/alpine.min.js" defer></script>
@@ -25,15 +26,15 @@
 </head>
 <body> 
     <div>
-        {{-- Sidebar --}}
-        @include('components/Sidebar')
+      
 
         <div id="loading-spinner" class="flex justify-center items-center bg-gray-950 fixed top-0 left-0 w-full h-full z-50 bg-opacity-50" style="display: none;">
             <div class="spinner-border text-primary" style="width: 3rem; height: 3rem; role="status">
                 <span class="sr-only">Loading...</span>
             </div>
         </div>
-
+        {{-- Sidebar --}}
+            @include('components/Sidebar')
         {{-- Header --}}
         @include('components/header')
         

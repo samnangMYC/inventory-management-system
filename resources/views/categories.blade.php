@@ -10,7 +10,7 @@
     
     <section class="flex flex-col">  
         <div class="py-2 -my-2 overflow-x-auto sm:-mx-6 sm:px-6 lg:-mx-8 lg:px-8">
-            <div class="inline-block min-w-full overflow-hidden align-middle border-b border-gray-200 dark:border-gray-700 shadow sm:rounded-lg">
+            <div class="inline-block bg-white min-w-full overflow-hidden align-middle border-b border-gray-200 dark:border-gray-700 shadow sm:rounded-lg">
                 <table class=" min-w-full dark:bg-gray-900 ">
                     <div class="overflow-y-auto max-h-[70vh]">
                     <thead class="sticky top-0 ">

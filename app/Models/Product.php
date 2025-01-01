@@ -35,7 +35,7 @@ class Product extends Model
       // Define the relationship with ProductInfo
       public function productInfo()
       {
-          return $this->hasOne(ProductInfo::class, 'pro_id', 'id'); // Specify the foreign key and local key
+          return $this->hasOne(ProductInfo::class, 'pro_id', 'id'); // 'pro_id' is the foreign key in ProductInfo
       }
 
       static public function getProductPrice($id)

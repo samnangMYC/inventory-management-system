@@ -4,6 +4,8 @@
 
 
 <div>
+        <!-- Display success message -->
+        @include('components/alert')
     <div class="flex px-4 py-2 justify-between">
         <h1 class="text-3xl font-medium text-gray-700 dark:text-white">All Product</h1>
         <button type="button" onclick="window.location='{{ route('product.create') }}'" class="text-white flex items-center gap-2 bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-3 py-2.5 me-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800">
@@ -12,6 +14,8 @@
               </svg>                 
              Add Product</button>
     </div>
+    
+
     <section class="p-2 rounded-t-md  dark:bg-gray-900">
         <form class="max-w-md mx-auto">   
             <label for="default-search" class="mb-2 text-sm font-medium text-gray-900 sr-only dark:text-white">Search</label>
@@ -79,10 +83,10 @@
                                 {{ $product->code }}
                             </td>
         
-                            <td class="px-6 py-2 whitespace-no-wrap border-b border-gray-200 dark:border-gray-700">
+                            <td class="px-6  py-2 whitespace-no-wrap border-b border-gray-200 dark:border-gray-700">
                                 <div class="flex items-center">
                                     <div class="flex-shrink-0 w-20 ">
-                                        <img class="h-16 rounded-md object-cover"  src="{{ asset('storage/' . $product->image) }}" alt="{{ $product->name }}">
+                                        <img class="h-16 rounded-md object-cover place-self-center"  src="{{ asset('storage/' . $product->image) }}" alt="{{ $product->name }}">
                                     </div>
                                 </div>
                             </td>

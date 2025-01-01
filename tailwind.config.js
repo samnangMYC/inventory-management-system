@@ -22,6 +22,9 @@ export default {
                 cream: '#FBF6E9',        // Custom cream
             },
         },
+        plugins: [
+            require('flowbite/plugin')
+        ], 
         
     },
     plugins: [],
