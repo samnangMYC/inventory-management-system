@@ -9,8 +9,8 @@ use App\Http\Controllers\RoleController;
 use App\Http\Controllers\SaleController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\SubCategoryController;
-use App\Http\Controllers\Sales;
 use App\Http\Controllers\CartController;
+use App\Http\Controllers\SaleListController;
 use Illuminate\Support\Facades\Route;
 
 
@@ -62,10 +62,14 @@ Route::group(['middleware' => 'useradmin'], function(){
     Route::put('/sub-category/{id}', [SubCategoryController::class, 'update'])->name('sub-category.update');
     Route::delete('/sub-category/{id}', [SubCategoryController::class, 'destroy'])->name('sub-category.destroy');
 
-    Route::get('/sales', [SaleController::class,'index'])->name('sale.index');
+    Route::get('/sales', [SaleController::class,'index'])->name(name: 'sale.index');
+    Route::post('/sales/create', [SaleController::class,'store'])->name(name: 'sale.store');
     Route::post('/cart/add', [CartController::class, 'add'])->name('cart.add');
     Route::put('/cart/update/{id}', [CartController::class, 'update'])->name('cart.update');
     Route::delete('/cart/remove/{id}', [CartController::class, 'destroy'])->name('cart.destroy');
+
+    Route::get('/sale-list', [SaleListController::class,'index'])->name(name: 'sale-list.index');
+    
 
     Route::get('/users', [UserController::class,'index'])->name('users.index');
     Route::get('/users/create', [UserController::class,'create'])->name('users.create');

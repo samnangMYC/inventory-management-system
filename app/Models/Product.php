@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 use App\Models\ProductPrice;
 use App\Models\SubCategory;
 use App\Models\ProductInfo;
-
+use App\Models\SaleItems;
 class Product extends Model
 {
     
@@ -37,6 +37,9 @@ class Product extends Model
       {
           return $this->hasOne(ProductInfo::class, 'pro_id', 'id'); // 'pro_id' is the foreign key in ProductInfo
       }
+      public function saleItems(){
+        return $this->hasMany(SaleItems::class);
+     }
 
       static public function getProductPrice($id)
       {

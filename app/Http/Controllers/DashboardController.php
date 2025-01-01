@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\User;
 use App\Models\Product;
+use App\Models\Sales;
 class DashboardController extends Controller
 {
     public function index()
@@ -12,7 +13,7 @@ class DashboardController extends Controller
           // Fetch data from the database
         $data['totalProducts'] = Product::count(); // Count of total products
         $data['activeUsers'] = User::where('status', '1')->count(); // Count of active users
-        $data['totalOrders'] = 0;
+        $data['totalSale'] = Sales::count();
   
         return view('dashboard',$data);
     }

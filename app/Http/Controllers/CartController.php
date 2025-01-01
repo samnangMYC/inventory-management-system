@@ -14,10 +14,16 @@ class CartController extends Controller
         ]);
         $productId = $request->product_id;
         $productPrice = $request->price;
+        $productDiscount = $request->discount;
+        $productTax = $request->tax;
+        $shipping = $request->shipping ?? 0;
         $product = Product::find($productId);
+        $stock = $product->stock;
+         
+        // dd($request->all());
       
-        if (!$product) {
-            return redirect()->route('products.index')->with('error', 'Product not found!');
+        if (!$product || $stock	< 1) {
+            return redirect()->route('sale.index')->with('error', 'Product not found or out of stock!');
         }
         // Add product to cart
         $cart = session()->get('cart', []);
@@ -28,9 +34,13 @@ class CartController extends Controller
         } else {
             // If not, add it to the cart with a quantity of 1
             $cart[$productId] = [
+                'id' => $productId,
                 'name' => $product->name,
                 'price' => $productPrice,
                 'quantity' => 1, // Set quantity to 1
+                'discount' => $productDiscount,
+                'tax' => $productTax,
+                'shipping' => $shipping,
             ];
         }
         session()->put('cart', $cart);
@@ -42,17 +52,23 @@ class CartController extends Controller
     {
         // Retrieve the cart from the session
         $cart = session()->get('cart', []);
-
+        
         // Check if the product exists in the cart
         if (isset($cart[$id])) {
             // Determine the action (increase or decrease)
             if ($request->input('action') === 'increase') {
+            // Check product stock before increasing quantity
+            $product = Product::find($id);
+            if ($product && $cart[$id]['quantity'] < $product->stock) {
                 $cart[$id]['quantity'] += 1; // Increase quantity
+            } else {
+                return redirect()->route('sale.index')->with('error', 'Not enough stock available!');
+            }
             } elseif ($request->input('action') === 'decrease') {
-                // Decrease quantity but ensure it doesn't go below 1
-                if ($cart[$id]['quantity'] > 1) {
-                    $cart[$id]['quantity'] -= 1; // Decrease quantity
-                }
+            // Decrease quantity but ensure it doesn't go below 1
+            if ($cart[$id]['quantity'] > 1) {
+                $cart[$id]['quantity'] -= 1; // Decrease quantity
+            }
             }
 
             // Update the session with the modified cart

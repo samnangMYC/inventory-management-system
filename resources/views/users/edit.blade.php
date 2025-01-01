@@ -67,12 +67,17 @@
                         <input type="hidden" id="role_id" name="role_id">
                     </div>
                      <!--End User Role -->
-                     <div class="mb-2">
-                        <label for="name" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Status *</label>
-                        <input type="text" value="{{$user->status}}" name="status" id="name" class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 dark:shadow-sm-light" placeholder="Sok Dara" required />
-                        
+                  
+                      <div>
+                        <label for="status" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Status *</label>
+                        <select id="status" name="status"  class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500">
+                            
+                            <option value="1">Active</option>
+                            <option value="0">Inative</option>
+                            
+                        </select>
                       </div>
-                      <span class="italic dark:text-slate-300">choose between <span class="text-red-600 underline">0 is inactive</span> and <span class="text-green-500 underline">1 is active.</span></span>
+                   
                       
          
                         <div class="py-6 text-end mt-4">
