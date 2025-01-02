@@ -41,7 +41,7 @@ class UserController extends Controller
     {
         $request->validate([
             'email' => 'required|email|unique:users,email',
-            'password' => 'required|min:6|confirmed', // Ensure you have a password confirmation field
+            'password' => 'required|min:6', // Ensure you have a password confirmation field
             'name' => 'required|string|max:255',
         ]);
                 // Check if validation fails

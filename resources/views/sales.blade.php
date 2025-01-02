@@ -157,7 +157,7 @@
             <form action="{{route('sale.store')}}" method="POST">
                 @csrf
               
-                <div class="grid grid-cols-1 lg:grid-cols-2 gap-2 p-2">
+                <div class="grid grid-cols-1 lg:grid-cols-2 gap-2 p-2 dark:bg-gray-900">
                     <div class="col-span-1 p-4 flex flex-col items-center justify-center space-y-3 w-full">
                           <div class="w-full">
                             <label for="category" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Payment Method *</label>

@@ -14,6 +14,7 @@
                 Add User</button>
             @endif
         </div>
+        @include('components.alert')
   
         
         <section class="flex flex-col">  
