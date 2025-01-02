@@ -4,11 +4,24 @@ namespace App\Http\Controllers;
 
 use App\Models\ProductBrand;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use App\Models\PermissionRole;
+use App\Models\Role;
+
 
 class ProductBrandController extends Controller
 {
     //
     public function index(){
+        $PermissionRole = PermissionRole::getPermission('Product Brand', Auth::user()->role_id);
+        $data['PermissionAdd'] = PermissionRole::getPermission('Add Product Brand', Auth::user()->role_id);
+        $data['PermissionEdit'] = PermissionRole::getPermission('Edit Product Brand', Auth::user()->role_id);
+        $data['PermissionDelete'] = PermissionRole::getPermission('Delete Product Brand', Auth::user()->role_id);
+        $data['PermissionRoles'] = PermissionRole::all();
+        if(!$PermissionRole){
+            abort(404);
+        }
+        $data['roles'] = Role::all();
         $data['productBrands'] = ProductBrand::all();
         
         return view('product-brand',$data);

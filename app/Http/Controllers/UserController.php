@@ -5,10 +5,22 @@ use App\Models\User;
 use Illuminate\Http\Request;
 use App\Models\Role;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Auth;
+use App\Models\PermissionRole;
+use App\Models\Permission;
+
 class UserController extends Controller
 {
     public function index()
     {
+        $PermissionRole = PermissionRole::getPermission('User', Auth::user()->role_id);
+        $data['PermissionAdd'] = PermissionRole::getPermission('Add User', Auth::user()->role_id);
+        $data['PermissionEdit'] = PermissionRole::getPermission('Edit User', Auth::user()->role_id);
+        $data['PermissionDelete'] = PermissionRole::getPermission('Delete User', Auth::user()->role_id);
+        $data['PermissionRoles'] = PermissionRole::all();
+        if(!$PermissionRole){
+            abort(404);
+        }
         $data['users'] = User::all();
         $data['roles'] =  Role::all();
       

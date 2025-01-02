@@ -3,7 +3,9 @@
 namespace App\Http\Controllers;
 use App\Models\Category;
 use Illuminate\Http\Request;
-
+use Illuminate\Support\Facades\Auth;
+use App\Models\PermissionRole;
+use App\Models\Role;
 class CategoryController extends Controller
 {
     /**
@@ -11,9 +13,17 @@ class CategoryController extends Controller
      */
     public function index()
     {
-        $categories = Category::all(); // Fetch all categories
+        $PermissionRole = PermissionRole::getPermission('Category', Auth::user()->role_id);
+        $data['PermissionAdd'] = PermissionRole::getPermission('Add Category', Auth::user()->role_id);
+        $data['PermissionEdit'] = PermissionRole::getPermission('Edit Category', Auth::user()->role_id);
+        $data['PermissionDelete'] = PermissionRole::getPermission('Delete Category', Auth::user()->role_id);
+        $data['PermissionRoles'] = PermissionRole::all();
+        if(!$PermissionRole){
+            abort(404);
+        }
+        $data['categories'] = Category::all(); // Fetch all categories
         // dd(session()->all());
-        return view("categories", compact('categories')); // Pass categories to the view
+        return view("categories", $data); // Pass categories to the view
     }
 
     /**

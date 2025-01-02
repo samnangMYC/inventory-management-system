@@ -9,11 +9,15 @@
     
 
     <div :class="sidebarOpen ? 'translate-x-0 ease-out' : '-translate-x-full ease-in'" id="sidebar" class="fixed bg-gradient-to-r dark:bg-gray-900 from-blue-600 to-blue-700  inset-y-0 left-0 z-30 w-64 overflow-y-auto transition duration-300 transform  lg:translate-x-0 lg:static lg:inset-0">
-      <button class="absolute pt-4 pl-3 " >
-         <svg class="w-10 h-10 text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
-            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M18 6H6m12 4H6m12 4H6m12 4H6"/>
-          </svg>    
-      </button>
+      <div class="pt-2 pl-3">
+         <button id="close-sidebar" >
+            <svg class="w-10 h-10 text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
+               <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M18 6H6m12 4H6m12 4H6m12 4H6"/>
+            </svg>    
+         </button>
+
+      </div>
+    
         <div class="flex items-center justify-center mt-8 ">
             <div class="flex items-center">     
                 <a href="{{route('dashboard')}}" class=" rounded-sm">
@@ -29,6 +33,8 @@
             $PermissionSubCategory = App\Models\PermissionRole::getPermission('Sub Category',Auth::user()->role_id);
             $PermissionProduct = App\Models\PermissionRole::getPermission('Product',Auth::user()->role_id);
             $PermissionProductBrand = App\Models\PermissionRole::getPermission('Product Brand',Auth::user()->role_id);
+            $PermissionSale = App\Models\PermissionRole::getPermission('Sale',Auth::user()->role_id);
+            $PermissionAddSale = App\Models\PermissionRole::getPermission('Add Sale',Auth::user()->role_id);
             $PermissionSetting = App\Models\PermissionRole::getPermission('Setting',Auth::user()->role_id);
         @endphp
 
@@ -44,6 +50,7 @@
             <span class="mx-3">Dashboard</span>
          </a>
             <!-- Sale Link -->
+            @if(!empty($PermissionAddSale))
             <a 
             class="{{ request()->routeIs('sale.index') ? 'bg-gray-700 bg-opacity-25 ' : '' }} flex items-center px-6 py-2 text-light hover:bg-secondary hover:bg-opacity-25 hover:text-gray-100" 
             href="{{ route('sale.index') }}">
@@ -53,8 +60,10 @@
              
             <span class="mx-3">Open POS</span>
           </a>
+          @endif
          </a>
          <!-- Sale Link -->
+         @if(!empty($PermissionSale))
          <a 
             class="{{ request()->routeIs('sale-list.index') ? 'bg-gray-700 bg-opacity-25 ' : '' }} flex items-center px-6 py-2 text-light hover:bg-secondary hover:bg-opacity-25 hover:text-gray-100" 
             href="{{ route('sale-list.index') }}">
@@ -65,7 +74,7 @@
             </svg>
             <span class="mx-3">Sales</span>
             </a>
-
+            @endif
             <!-- Product Brand Link -->
             @if(!empty($PermissionProductBrand))
             <a 
@@ -141,6 +150,15 @@
             @endif
         </nav>
         <script>
-          
+            // Toggle sidebar visibility
+            $('#toggle-sidebar').click(function() {
+                $('#sidebar').toggleClass('hidden'); // Toggle the 'hidden' class
+            });
+            $(document).ready(function() {
+            // Close sidebar when close button is clicked
+            $('#close-sidebar').click(function() {
+                $('#sidebar').addClass('hidden'); // Add the 'hidden' class to close the sidebar
+            });
+        });
         </script>
     </div>

@@ -4,11 +4,22 @@ namespace App\Http\Controllers;
 use App\Models\SubCategory;
 use App\Models\Category;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use App\Models\PermissionRole;
+use App\Models\Role;
 
 class SubCategoryController extends Controller
 {
     public function index()
     {
+        $PermissionRole = PermissionRole::getPermission('Sub Category', Auth::user()->role_id);
+        $data['PermissionAdd'] = PermissionRole::getPermission('Add Sub Category', Auth::user()->role_id);
+        $data['PermissionEdit'] = PermissionRole::getPermission('Edit Sub Category', Auth::user()->role_id);
+        $data['PermissionDelete'] = PermissionRole::getPermission('Delete Sub Category', Auth::user()->role_id);
+        $data['PermissionRoles'] = PermissionRole::all();
+        if(!$PermissionRole){
+            abort(404);
+        }
         $data["subCategories"] = SubCategory::all(); // Fetch all subcategories
 
         return view('sub-category', $data); // Return a view

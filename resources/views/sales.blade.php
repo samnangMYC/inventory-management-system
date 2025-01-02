@@ -2,17 +2,17 @@
 
 @section('content')
 
-<div class="dark:text-white py-2 -my-2 overflow-x-auto sm:-mx-6 sm:px-6 lg:-mx-8 lg:px-8 rounded-md">
+<div class="dark:text-white py-4  -my-2 overflow-x-auto sm:-mx-6 sm:px-6 lg:-mx-8 lg:px-8 rounded-lg">
     
     @include('components/alert')
     @include('components/error-alert')
     <!--Product and Cash -->
-    <div class="grid grid-cols-1 md:grid-cols-4 gap-4 h-screen dark:text-gray-800 rounded-md">
+    <div class="grid grid-cols-1 md:grid-cols-4 gap-4 h-screen dark:text-gray-800 rounded-lg">
         
         <!-- List of Product  -->
-        <div class="col-span-3 bg-gray-100 overflow-y-scroll h-[80vh] xl:h-screen dark:bg-black p-12">
+        <div class="col-span-3 bg-gray-100  overflow-y-scroll h-[80vh] xl:h-screen dark:bg-gray-900 p-12 rounded-lg">
             <!-- Product List Header -->
-            <div class="flex sticky">
+            <div class="flex sticky ">
                 <!-- Search Product -->
                 <div class="flex px-4 py-3 mb-12 rounded-md border-2 border-blue-500 overflow-hidden max-w-md mx-auto font-[sans-serif]">
                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 192.904 192.904" width="16px" class="fill-gray-600 mr-3 rotate-90">
@@ -33,7 +33,7 @@
             </div>
 
             <!-- List Product -->
-            <div class="grid grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-12">
+            <div class="grid grid-cols-2 lg:grid-cols-3  xl:grid-cols-4 gap-12  ">
                 <!-- This div takes up the full height of the parent div -->
                 @foreach($products as $product)
                 <form action="{{ route('cart.add') }}" method="POST" class="col-span-1">
@@ -44,8 +44,8 @@
                     <input type="hidden" name="price" value="{{$product->prices->first()->price ?? 0 }}">
                     <input type="hidden" name="tax" value="{{$product->productInfo->tax ?? 0 }}">
                     <input type="hidden" name="stock" value="{{$product->stock }}">
-                    <div class="col-span-1 relative border bg-white dark:bg-gray-800 h-80 rounded-xl shadow p-3 space-y-3">
-                        <div class="mt-12">
+                    <div class="col-span-1 relative border bg-white dark:bg-black  h-80 rounded-xl shadow p-3 space-y-3">
+                        <div class="mt-12  ">
                             <img src="{{ asset('storage/' . $product->image) }}" alt="{{ $product->name }}" class="h-32 place-self-center rounded-lg">
                             <h1 class="text-lg text-center line-clamp-2 mt-3">{{ $product->name }}</h1>
                             <p class="text-center opacity-75 uppercase">{{ $product->subCategory->name }}</p>
@@ -79,9 +79,9 @@
                 @endforeach
             </div>
         </div>
-        <div class="col-span-1 bg-white overflow-y-scroll h-[80vh]  md:h-full">
+        <div class="col-span-1 bg-whiteoverflow-y-scroll h-[80vh] bg-white  md:h-full">
             <!-- Product In Card -->
-            <div class="flex flex-col h-full dark:bg-black">
+            <div class="flex flex-col h-full  dark:bg-gray-900  ">
                 <table class="min-w-full mb-64 sticky top-0 dark:bg-gray-900">
                     <thead class="">
                         <tr>
@@ -209,11 +209,11 @@
                     
                 <!-- Main modal -->
                 <div id="crud-modal" tabindex="-1" aria-hidden="true" class="hidden animate flip-up bg-slate-200 bg-opacity-50 overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 justify-center items-center w-full md:inset-0 h-[calc(100%-1rem)] max-h-full">
-                    <div class="relative p-4 max-h-full">
+                    <div class="relative p-4 max-h-full  ">
                         <!-- Modal content -->
-                        <div class="relative bg-white rounded-lg shadow dark:bg-gray-700">
+                        <div class="relative bg-white rounded-lg shadow ">
                             <!-- Modal header -->
-                            <div class="flex items-center justify-between p-4 md:p-5 border-b rounded-t dark:border-gray-600">
+                            <div class="flex items-center dark:bg-gray-900 dark:text-white justify-between p-4 md:p-5 border-b rounded-t dark:border-gray-600">
                                 <h3 class="text-lg font-semibold text-gray-900 dark:text-white">
                                     Ready to create new sale!!
                                 </h3>
@@ -225,12 +225,10 @@
                                 </button>
                             </div>
                             <!-- Modal body -->
-                          
-                               
-                                <div class="flex flex-col gap-4 p-5">
-                                    <div class="relative overflow-x-auto shadow-md sm:rounded-lg">
-                                        <table class="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
-                                            <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
+                            <div class="flex flex-col gap-4 p-5 dark:bg-gray-900 dark:text-white">
+                                    <div class="relative   overflow-x-auto shadow-md sm:rounded-lg">
+                                        <table class="w-full text-sm text-left  rtl:text-right text-gray-500 dark:text-gray-400">
+                                            <thead class="text-xs text-gray-700 uppercase   dark:bg-gray-700 dark:text-gray-400">
                                                 <tr>
                                                     <th scope="col" class="px-6 py-3">
                                                         Product name
@@ -288,7 +286,7 @@
                                                 @endforeach
                                                 @else
                                                 <tr>
-                                                    <td colspan="6" class="px-6 py-3 text-sm leading-5 text-gray-500 dark:text-white text-center border-b border-gray-200">
+                                                    <td colspan="7" class="px-6 py-3 text-sm leading-5 text-gray-500 dark:text-white text-center border-b border-gray-200">
                                                         Your cart is empty.
                                                     </td>
                                                 </tr>
@@ -332,12 +330,15 @@
                                     </div>
         
                                 <div class="mt-8 flex gap-4 items-center ">
+                                    @if(!empty($PermissionAdd))
                                     <button type="submit" class="text-white flex gap-2 items-center bg-gradient-to-br from-purple-600 to-blue-500 hover:bg-gradient-to-bl focus:ring-4 focus:outline-none focus:ring-blue-300 dark:focus:ring-blue-800 font-medium rounded-lg text-sm px-3 py-2.5 text-center me-2 mb-2">
                                         <svg class="w-6 h-6 text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
                                             <path stroke="currentColor" stroke-linejoin="round" stroke-width="2" d="M16.444 18H19a1 1 0 0 0 1-1v-5a1 1 0 0 0-1-1H5a1 1 0 0 0-1 1v5a1 1 0 0 0 1 1h2.556M17 11V5a1 1 0 0 0-1-1H8a1 1 0 0 0-1 1v6h10ZM7 15h10v4a1 1 0 0 1-1 1H8a1 1 0 0 1-1-1v-4Z"/>
                                           </svg>
                                           
                                        Create & Print</button>
+                                    @endif
+                                    
                         </div>
                     </div>
                     </div>

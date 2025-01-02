@@ -1,10 +1,10 @@
 <?php
 
 namespace App\Http\Controllers;
-use App\Models\PermissionRole;
-use App\Models\Role;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use App\Models\PermissionRole;
+use App\Models\Role;
 use App\Models\Permission;
 class RoleController extends Controller
 {

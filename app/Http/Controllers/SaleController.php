@@ -9,7 +9,10 @@ use Illuminate\Http\Request;
 use App\Models\Product;
 use App\Models\SubCategory;
 use App\Models\Sales;
+use Illuminate\Support\Facades\Auth;
 use App\Models\SaleInfo;
+use App\Models\Role;
+use App\Models\PermissionRole;
 use Illuminate\Support\Facades\DB;
 
 class SaleController extends Controller
@@ -22,7 +25,14 @@ class SaleController extends Controller
        
         // Retrieve the subcategory_id from the request
         $subCategory = $request->input('subcategory_id');
+        $PermissionRole = PermissionRole::getPermission('Sale', Auth::user()->role_id);
+        $PermissionAdd = PermissionRole::getPermission('Add Sale', Auth::user()->role_id);
+        $PermissionRole = PermissionRole::all();
+        if(!$PermissionRole){
+            abort(404);
+        }
 
+        
         
         $products = Product::all();
         $subCategories = SubCategory::all();
@@ -80,6 +90,8 @@ class SaleController extends Controller
             'totalTax' => $totalTax,
             'totalShipping' => $totalShipping,
             'finalPrice' => $finalPrice,
+            'PermissionAdd' => $PermissionAdd,
+            'PermissionRole' => $PermissionRole,
         ];
         return view('sales',$data);
     }

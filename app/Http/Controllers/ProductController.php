@@ -8,6 +8,9 @@ use Illuminate\Http\Request;
 use App\Models\ProductPrice;
 use App\Models\ProductInfo;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\Auth;
+use App\Models\PermissionRole;
+use Illuminate\Support\Facades\Log;
 class ProductController extends Controller
 {
     /**
@@ -15,6 +18,22 @@ class ProductController extends Controller
      */
     public function index()
     {  
+        $PermissionRole = PermissionRole::getPermission('Product', Auth::user()->role_id);
+        $permissionAdd = PermissionRole::getPermission('Add Product', Auth::user()->role_id);
+        $permissionEdit = PermissionRole::getPermission('Edit Product', Auth::user()->role_id);
+        $permissionDelete = PermissionRole::getPermission('Delete Product', Auth::user()->role_id);
+        $permissionRoles = PermissionRole::all();
+      // Dump the permissions and stop execution
+        // dd([
+        //     'PermissionAdd' => $data['PermissionAdd'],
+        //     'PermissionEdit' => $data['PermissionEdit'],
+        //     'PermissionDelete' => $data['PermissionDelete'],
+        //     'PermissionRoles' => $data['PermissionRoles'],
+        // ]);
+        if(!$PermissionRole){
+            abort(404);
+        }
+
         // Fetch all products
         $products = Product::all();
         // Fetch all product categories
@@ -51,7 +70,11 @@ class ProductController extends Controller
             'products_info' => $productsInfo,
             'brandName' => $brandName,
             'productCategories'=> $productCategories,
-            'productInfo' => $productSpecification
+            'productInfo' => $productSpecification,
+            'PermissionAdd' => $permissionAdd,
+            'PermissionEdit' => $permissionEdit,
+            'PermissionDelete' => $permissionDelete,
+            'PermissionRoles' => $permissionRoles,
         ];
     
         // Return the view with the data

@@ -1,12 +1,13 @@
 <div class="flex flex-col flex-1 overflow-hidden">
     <header class="flex items-center justify-between px-6 py-4 dark:bg-gray-900 dark:text-white border-b-4 border-primary">
         <div class="flex items-center gap-4">
-            <button @click="sidebarOpen = true" class="text-gray-500 focus:outline-none lg:hidden">
+            <button @click="sidebarOpen = true" class="text-gray-500 focus:outline-none lg:hidden ">
                 <svg class="w-8 h-8 dark:text-white" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                     <path d="M4 6H20M4 12H20M4 18H11" stroke="currentColor" stroke-width="2" stroke-linecap="round"
                         stroke-linejoin="round"></path>
                 </svg>
             </button>
+
             <div class="font-light">
             {{ Request::segment(1) }}
              <span>/</span>
@@ -124,5 +125,5 @@
                 </div>
             </div>
         </div>
-
+   
     </header>
